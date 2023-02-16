@@ -14,6 +14,7 @@ class Snacks : Sprite
     float snackSpeed;
     int snackRow;
     int snackType;
+    int initializeValue = 0;
     public Snacks(TiledObject obj=null) : base("circle.png", true, true)
     {
         Initialize(obj);
@@ -35,7 +36,25 @@ class Snacks : Sprite
             snackRow = obj.GetIntProperty("snackRow",1);
             snackType = obj.GetIntProperty("snackType", 1);
         }
+    }
 
+    void Update()
+    {
+        if (initializeValue == 0) { ChangeX(); initializeValue++; }
+        currentLifeTimeMs += Time.deltaTime;
+        if (currentLifeTimeMs >= delayInMs)
+        {
+            canmove = true;
+        }
+
+        if (canmove)
+        {
+            y = y + 1 * snackSpeed;
+        }
+    }
+
+    void ChangeX()
+    {
         switch (snackRow - 1)
         {
             case 0:
@@ -54,11 +73,14 @@ class Snacks : Sprite
                 x = 896;
                 break;
         }
-/**
+    }
+
+    void ChangeSprite()
+    {
         switch (snackType - 1)
         {
             case 0:
-                filename = 
+
                 break;
 
             case 1:
@@ -73,21 +95,7 @@ class Snacks : Sprite
 
                 break;
         }
-**/
     }
 
-    void Update()
-    {
-        currentLifeTimeMs += Time.deltaTime;
-        if (currentLifeTimeMs >= delayInMs)
-        {
-            canmove = true;
-        }
-
-        if (canmove)
-        {
-            y = y + 1 * snackSpeed;
-        }
-    }
 }
 
