@@ -449,7 +449,7 @@ namespace TiledMapParser
 		public float Rotation = 0;
 		[XmlAttribute("name")]
 		public string Name;
-		[XmlAttribute("type")]
+		[XmlAttribute("class")]
 		public string Type;
 		[XmlAttribute("width")]		// width in pixels
 		public float Width;

@@ -5,7 +5,7 @@ using TiledMapParser;
 public class MyGame : Game {
 	SoundChannel soundTrack;
 
-	public MyGame() : base(2560, 1440, true, false, 1920, 1080)
+	public MyGame() : base(2560, 1440, false, false, 1920, 1080)
 	{
         LoadLevel("Level1.tmx");
     }
@@ -27,12 +27,12 @@ public class MyGame : Game {
 		loader.rootObject = mainlayer1;
 		loader.LoadObjectGroups(0);
 
-		// Main Layer 2
-		Pivot mainlayer2= new Pivot();
-		AddChild(mainlayer2);
-		loader.rootObject = mainlayer2;
-		loader.LoadObjectGroups(1);
-	}
+        // Main Layer 2
+        Pivot mainlayer2 = new Pivot();
+        AddChild(mainlayer2);
+        loader.rootObject = mainlayer2;
+        loader.LoadObjectGroups(1);
+    }
 
 	void MoveSpaceShip() {
 		if (Input.GetKey(Key.A)) {
