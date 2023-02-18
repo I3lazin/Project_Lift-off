@@ -167,7 +167,6 @@ namespace GXPEngine
 		private int i = 0; 
 		override protected void RenderSelf(GLContext glContext) {
 			if (game != null) {
-				Console.WriteLine("test" + x + " " + y);
 				Vector2[] bounds = GetExtents();
 				float maxX = float.MinValue;
 				float maxY = float.MinValue;

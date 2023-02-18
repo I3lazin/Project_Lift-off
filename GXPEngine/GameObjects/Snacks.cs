@@ -51,6 +51,10 @@ class Snacks : Sprite
         {
             y = y + 1 * snackSpeed;
         }
+        if (y > 1088)
+        {
+            this.Destroy();
+        }
     }
 
     void ChangeX()
@@ -58,19 +62,19 @@ class Snacks : Sprite
         switch (snackRow - 1)
         {
             case 0:
-                x = 896;
+                x = 736;
                 break;
             case 1:
-                x = 1120;
+                x = 896;
                 break;
             case 2:
-                x = 1344;
+                x = 1056;
                 break;
             case 3:
-                x = 1568;
+                x = 1216;
                 break;
             default:
-                x = 896;
+                x = 736;
                 break;
         }
     }
