@@ -8,36 +8,77 @@ using TiledMapParser;
 
 public class MyGame : Game {
 	SoundChannel soundTrack;
-    Sound song1 = new Sound("Testsong.wav", false, true);
-    bool notinlevel = true;
     EasyDraw Player1ScoreUI;
     EasyDraw Player2ScoreUI;
-    public MyGame() : base(1920, 1080, false)
+    string nextlevel = null;
+    string nextsong = null;
+    public MyGame() : base(1920, 1080, true)
 	{
-
+        LoadLevel("Level1.tmx", "Testsong.wav");
+        OnAfterStep += CheckLoadLevel;
     }
 
-    void LoadLevel(string filename)
+    void DestroyAll()
     {
-        DestroyAll();
-        AddChild(new Level(filename));
-        CreateUI();
-        notinlevel= false;
-        song1.Play();
+        List<GameObject> children = GetChildren();
+        foreach (GameObject child in children)
+        {
+            child.Destroy();
+        }
     }
 
-	void CheckInputs() {
+    void LoadLevel(string filename, string musicname)
+    {
+        nextlevel = filename;
+        nextsong = musicname;
+    }
+
+    void CheckLoadLevel()
+    {
+        if (nextlevel != null)
+        {
+            DestroyAll();
+            AddChild(new Level(nextlevel, nextsong));
+            CreateUI();
+            nextlevel= null;
+        }
+    }
+
+
+
+    void CreateUI()
+    {
+        Player1ScoreUI = new EasyDraw(100, 20, false);
+        Player2ScoreUI = new EasyDraw(100, 20, false);
+        Player2ScoreUI.SetXY(width - Player2ScoreUI.width, 0);
+    }
+
+	void Update() {
+            
+    }
+
+	static void Main() {
+		new MyGame().Start();
+	}
+
+
+    void CheckInputs()
+    {
         // Player 1
-		if (Input.GetKeyDown(Key.Q)) {
+        if (Input.GetKeyDown(Key.Q))
+        {
             Console.WriteLine("Pressed: Q");
         }
-		if (Input.GetKeyDown(Key.W)) {
+        if (Input.GetKeyDown(Key.W))
+        {
             Console.WriteLine("Pressed: W");
         }
-		if (Input.GetKeyDown(Key.E)) {
+        if (Input.GetKeyDown(Key.E))
+        {
             Console.WriteLine("Pressed: E");
         }
-		if (Input.GetKeyDown(Key.R)) {
+        if (Input.GetKeyDown(Key.R))
+        {
             Console.WriteLine("Pressed: R");
         }
         // Player 2
@@ -68,32 +109,4 @@ public class MyGame : Game {
             Console.WriteLine("Pressed: N");
         }
     }
-
-    void DestroyAll()
-    {
-        List<GameObject> children = GetChildren();
-        foreach (GameObject child in children)
-        {
-            child.Destroy();
-        }
-
-    }
-
-    void CreateUI()
-    {
-        Player1ScoreUI = new EasyDraw(100, 20, false);
-        Player2ScoreUI = new EasyDraw(100, 20, false);
-        Player2ScoreUI.SetXY(width - Player2ScoreUI.width, 0);
-    }
-
-	void Update() {
-        if (Input.AnyKey() && notinlevel)
-        {
-            LoadLevel("Level1.tmx");
-        }    
-    }
-
-	static void Main() {
-		new MyGame().Start();
-	}
 }

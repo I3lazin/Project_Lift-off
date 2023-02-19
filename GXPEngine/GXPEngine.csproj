@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameObjects\Level.cs" />
+    <Compile Include="GameObjects\PlayerControl.cs" />
     <Compile Include="GameObjects\Snacks.cs" />
     <Compile Include="GXPEngine\AddOns\Gizmos.cs" />
     <Compile Include="GXPEngine\AddOns\SpriteBatch.cs" />

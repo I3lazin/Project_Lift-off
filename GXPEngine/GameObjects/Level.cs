@@ -18,6 +18,17 @@ class Level : GameObject
         CreateLevel();
     }
 
+    public Level(string filename, string musicname)
+    {
+        currentLevelName= filename;
+        loader = new TiledLoader(filename);
+        CreateLevel();
+        if (musicname != null)
+        {
+            new Sound(musicname).Play();
+        }
+    }
+
     void CreateLevel(bool includeImageLayers=true)
     {
         loader.autoInstance = true;
@@ -44,6 +55,11 @@ class Level : GameObject
     public string GetCurrentLevel()
     {
         return currentLevelName;
+    }
+
+    void Update()
+    {
+        Console.WriteLine(Time.now);
     }
 }
 

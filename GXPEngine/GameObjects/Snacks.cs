@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GXPEngine;
+using GXPEngine.Core;
 using TiledMapParser;
 
 class Snacks : Sprite
@@ -15,6 +16,8 @@ class Snacks : Sprite
     int snackRow;
     int snackType;
     int initializeValue = 0;
+    string[] snack = {"circle.png","checkers.png","colors.png","square.png","triangle.png"};
+
     public Snacks(TiledObject obj=null) : base("circle.png", true, true)
     {
         Initialize(obj);
@@ -34,19 +37,18 @@ class Snacks : Sprite
             delayInMs = obj.GetIntProperty("delayInMs", 2000);
             snackSpeed = obj.GetFloatProperty("snackSpeed", 2);
             snackRow = obj.GetIntProperty("snackRow",1);
-            snackType = obj.GetIntProperty("snackType", 1);
+            snackType = obj.GetIntProperty("snackType", 0);
         }
+        ChangeSprite();
+        ChangeX();
     }
 
     void Update()
     {
-        if (initializeValue == 0) { ChangeX(); initializeValue++; }
-        currentLifeTimeMs += Time.deltaTime;
         if (currentLifeTimeMs >= delayInMs)
         {
             canmove = true;
         }
-
         if (canmove)
         {
             y = y + 1 * snackSpeed;
@@ -81,25 +83,7 @@ class Snacks : Sprite
 
     void ChangeSprite()
     {
-        switch (snackType - 1)
-        {
-            case 0:
-
-                break;
-
-            case 1:
-
-                break;
-
-            case 2:
-
-                break;
-
-            case 3:
-
-                break;
-        }
+        initializeFromTexture(Texture2D.GetInstance(snack[snackType], true));
     }
-
 }
 
