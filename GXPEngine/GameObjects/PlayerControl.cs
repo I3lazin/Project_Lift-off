@@ -7,7 +7,7 @@ using GXPEngine;
 
 class PlayerControl : Pivot
 {
-    PlayerControl() : base()
+    public PlayerControl() : base()
     {
 
     }

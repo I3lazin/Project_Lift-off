@@ -31,7 +31,6 @@ class Snacks : Sprite
     void Initialize(TiledObject obj = null)
     {
         collider.isTrigger= true;
-
         if (obj != null)
         {
             delayInMs = obj.GetIntProperty("delayInMs", 2000);
@@ -41,11 +40,12 @@ class Snacks : Sprite
         }
         ChangeSprite();
         ChangeX();
+        currentLifeTimeMs = Time.time;
     }
 
     void Update()
     {
-        if (currentLifeTimeMs >= delayInMs)
+        if (Time.time - currentLifeTimeMs >= delayInMs)
         {
             canmove = true;
         }
