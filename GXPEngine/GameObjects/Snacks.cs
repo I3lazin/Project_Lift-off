@@ -7,7 +7,7 @@ using GXPEngine;
 using GXPEngine.Core;
 using TiledMapParser;
 
-class Snacks : Sprite
+public class Snacks : Sprite
 {
     int currentLifeTimeMs = 0;
     bool canmove = false;
@@ -15,10 +15,9 @@ class Snacks : Sprite
     float snackSpeed;
     int snackRow;
     int snackType;
-    int initializeValue = 0;
     string[] snack = {"circle.png","checkers.png","colors.png","square.png","triangle.png"};
 
-    public Snacks(TiledObject obj=null) : base("circle.png", true, true)
+    public Snacks(TiledObject obj=null) : base("circle.png", false, true)
     {
         Initialize(obj);
     }

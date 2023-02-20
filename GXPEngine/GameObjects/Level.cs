@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 using GXPEngine;
 using TiledMapParser;
 
-class Level : GameObject
+public class Level : GameObject
 {
     TiledLoader loader;
-    string currentLevelName;
+    public string currentLevelName;
 
     public Level(string filename)
     {
@@ -32,6 +32,7 @@ class Level : GameObject
     void CreateLevel(bool includeImageLayers=true)
     {
         loader.autoInstance = true;
+        loader.addColliders = false;
 
         // Background layer
         Pivot background = new Pivot();
@@ -40,26 +41,23 @@ class Level : GameObject
         loader.LoadImageLayers(0);
 
         // Main Layer 1
+        loader.addColliders = true;
         Pivot mainlayer1 = new Pivot();
         AddChild(mainlayer1);
         loader.rootObject = mainlayer1;
         loader.LoadObjectGroups(0);
 
         // Main Layer 2
+        loader.addColliders = false;
         Pivot mainlayer2 = new Pivot();
         AddChild(mainlayer2);
         loader.rootObject = mainlayer2;
         loader.LoadObjectGroups(1);
     }
 
-    public string GetCurrentLevel()
-    {
-        return currentLevelName;
-    }
-
     void Update()
     {
-        Console.WriteLine(Time.now);
+
     }
 }
 
