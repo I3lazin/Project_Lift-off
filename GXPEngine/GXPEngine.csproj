@@ -40,9 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameObjects\HUD.cs" />
     <Compile Include="GameObjects\Level.cs" />
     <Compile Include="GameObjects\PlayerControl.cs" />
     <Compile Include="GameObjects\Snacks.cs" />
+    <Compile Include="GameObjects\Ui.cs" />
     <Compile Include="GXPEngine\AddOns\Gizmos.cs" />
     <Compile Include="GXPEngine\AddOns\SpriteBatch.cs" />
     <Compile Include="GXPEngine\AddOns\TiledLoader.cs" />

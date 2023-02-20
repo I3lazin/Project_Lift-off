@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using GXPEngine;
 using TiledMapParser;
 
-public class Level : GameObject
+public class Level : Pivot
 {
     TiledLoader loader;
     public string currentLevelName;

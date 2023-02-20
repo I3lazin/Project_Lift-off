@@ -8,7 +8,7 @@ using TiledMapParser;
 
 public class PlayerControl : Sprite
 {
-    GameObject[] objects;
+    HUD hud = null;
     public PlayerControl(TiledObject obj = null) : base("Blank.png", false, true)
     {
         
@@ -20,21 +20,25 @@ public class PlayerControl : Sprite
         if (Input.GetKeyDown(Key.Q))
         {
             Console.WriteLine("Pressed: Q");
+            hud.AddScoreP1(100);
             return 1;
         }
         if (Input.GetKeyDown(Key.W))
         {
             Console.WriteLine("Pressed: W");
+            hud.AddScoreP1(100);
             return 2;
         }
         if (Input.GetKeyDown(Key.E))
         {
             Console.WriteLine("Pressed: E");
+            hud.AddScoreP1(100);
             return 3;
         }
         if (Input.GetKeyDown(Key.R))
         {
             Console.WriteLine("Pressed: R");
+            hud.AddScoreP1(100);
             return 4;
         }
         else
@@ -49,21 +53,25 @@ public class PlayerControl : Sprite
         if (Input.GetKeyDown(Key.O))
         {
             Console.WriteLine("Pressed: O");
+            hud.AddScoreP2(100);
             return 1;
         }
         if (Input.GetKeyDown(Key.P))
         {
             Console.WriteLine("Pressed: P");
+            hud.AddScoreP2(100);
             return 2;
         }
         if (Input.GetKeyDown(Key.SQ_BRACKET_1))
         {
             Console.WriteLine("Pressed: [");
+            hud.AddScoreP2(100);
             return 3;
         }
         if (Input.GetKeyDown(Key.SQ_BRACKET_2))
         {
             Console.WriteLine("Pressed: ]");
+            hud.AddScoreP2(100);
             return 4;
         } 
         else
@@ -93,7 +101,8 @@ public class PlayerControl : Sprite
 
     void Update()
     {
-            CheckInputPlayer1();
-            CheckInputPlayer2();
+        if (hud == null) hud = game.FindObjectOfType<HUD>();
+        CheckInputPlayer1();
+        CheckInputPlayer2();
     }
 }
