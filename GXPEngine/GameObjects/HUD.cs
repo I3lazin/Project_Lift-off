@@ -19,7 +19,7 @@ public class HUD : GameObject
         //Font
         bangerFont = Utils.LoadFont("Font.otf",40);
 
-        //Player 1
+        //Player 1 Score
         Player1Score = new EasyDraw(500, 60);
         Player1Score.TextFont(bangerFont);
         Player1Score.TextAlign(CenterMode.Min,CenterMode.Center);
@@ -28,7 +28,9 @@ public class HUD : GameObject
         Player1Score.SetXY(120, 1020);
         AddChild(Player1Score);
 
-        //Player 2
+        //Player 1 Hit
+
+        //Player 2 Score
         Player2Score = new EasyDraw(500, 60);
         Player2Score.TextFont(bangerFont);
         Player2Score.TextAlign(CenterMode.Min, CenterMode.Center);
@@ -64,5 +66,41 @@ public class HUD : GameObject
         ScoreP2 += addedpoints;
         SetScoreP2();
     }
-}
 
+    public void RemoveScoreP1(int removedpoints)
+    {
+        ScoreP1 -= removedpoints;
+        SetScoreP1();
+    }
+
+    public void RemoveScoreP2(int removedpoints)
+    {
+        ScoreP2 -= removedpoints;
+        SetScoreP2();
+    }
+
+    public void TriggerPerfect(int player)
+    {
+
+    }
+
+    public void TriggerGood(int player)
+    {
+
+    }
+
+    public void TriggerNormal(int player)
+    {
+
+    }
+
+    public void TriggerWrong(int player)
+    {
+
+    }
+
+    public void TriggerMissed(int player)
+    {
+
+    }
+}

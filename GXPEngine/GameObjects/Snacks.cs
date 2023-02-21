@@ -9,6 +9,7 @@ using TiledMapParser;
 
 public class Snacks : Sprite
 {
+    HUD hud = new HUD();
     int currentLifeTimeMs = 0;
     public bool canmove = false;
     public int delayInMs;
@@ -48,8 +49,9 @@ public class Snacks : Sprite
         {
             y = y + 1 * snackSpeed;
         }
-        if (y > 900)
+        if (y > 929)
         {
+            hud.TriggerMissed();
             DestoryListSnack();
         }
         if (y > 1088)
