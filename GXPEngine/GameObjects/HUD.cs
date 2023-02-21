@@ -13,6 +13,12 @@ public class HUD : GameObject
     int ScoreP2 = 0;
     EasyDraw Player1Score;
     EasyDraw Player2Score;
+    EasyDraw triggerPerfect;
+    EasyDraw triggerGood;
+    EasyDraw triggerNormal;
+    EasyDraw triggerWrong;
+    EasyDraw triggerMissed;
+    EasyDraw triggerBad; 
     Font bangerFont;
     public HUD()
     {
@@ -52,7 +58,7 @@ public class HUD : GameObject
 
     public void SetScoreP2()
     {
-        Player2Score.Text(String.Format("Score: {0:0000000}", ScoreP2), true);
+        Player2Score.Text(String.Format("Score: {0:0000000}",ScoreP2), true);
     }
 
     public void AddScoreP1(int addedpoints)
@@ -81,26 +87,128 @@ public class HUD : GameObject
 
     public void TriggerPerfect(int player)
     {
-
+        triggerPerfect = new EasyDraw(500, 60);
+        triggerPerfect.TextFont(bangerFont);
+        triggerPerfect.TextAlign(CenterMode.Min, CenterMode.Center);
+        triggerPerfect.Fill(Color.Yellow);
+        triggerPerfect.Text("PERFECT!");
+        if (player == 1)
+        {
+            AddScoreP1(200);
+            triggerPerfect.SetXY(120, 100);
+        }
+        else if (player == 2)
+        {
+            AddScoreP2(200);
+            triggerPerfect.SetXY(1100, 100);
+        }
+ 
+        AddChild(triggerPerfect);
+        Task.Delay(500).ContinueWith(t => { RemoveChild(triggerPerfect); });
     }
 
     public void TriggerGood(int player)
     {
-
+        triggerGood = new EasyDraw(500, 60);
+        triggerGood.TextFont(bangerFont);
+        triggerGood.TextAlign(CenterMode.Min, CenterMode.Center);
+        triggerGood.Fill(Color.Yellow);
+        triggerGood.Text("GOOD!");
+        if (player == 1)
+        {
+            AddScoreP2(150);
+            triggerGood.SetXY(120, 100);
+        }
+        else if (player == 2)
+        {
+            AddScoreP2(150);
+            triggerGood.SetXY(1100, 100);
+        }
+        AddChild(triggerGood);
+        Task.Delay(500).ContinueWith(t => { RemoveChild(triggerGood); });
     }
 
     public void TriggerNormal(int player)
     {
-
+        triggerNormal = new EasyDraw(500, 60);
+        triggerNormal.TextFont(bangerFont);
+        triggerNormal.TextAlign(CenterMode.Min, CenterMode.Center);
+        triggerNormal.Fill(Color.Yellow);
+        triggerNormal.Text("OK!");
+        if (player == 1)
+        {
+            AddScoreP2(100);
+            triggerNormal.SetXY(120, 100);
+        }
+        else if (player == 2)
+        {
+            AddScoreP2(100);
+            triggerNormal.SetXY(1100, 100);
+        }
+        AddChild(triggerNormal);
+        Task.Delay(500).ContinueWith(t => { RemoveChild(triggerNormal); });
     }
 
     public void TriggerWrong(int player)
     {
-
+        triggerWrong = new EasyDraw(500, 60);
+        triggerWrong.TextFont(bangerFont);
+        triggerWrong.TextAlign(CenterMode.Min, CenterMode.Center);
+        triggerWrong.Fill(Color.Yellow);
+        triggerWrong.Text("WRONG!");
+        if (player == 1)
+        {
+            RemoveScoreP1(50);
+            triggerWrong.SetXY(120, 100);
+        }
+        else if (player == 2)
+        {
+            RemoveScoreP2(50);
+            triggerWrong.SetXY(1100, 100);
+        }
+        AddChild(triggerWrong);
+        Task.Delay(500).ContinueWith(t => { RemoveChild(triggerWrong); });
     }
 
     public void TriggerMissed(int player)
     {
+        triggerMissed = new EasyDraw(500, 60);
+        triggerMissed.TextFont(bangerFont);
+        triggerMissed.TextAlign(CenterMode.Min, CenterMode.Center);
+        triggerMissed.Fill(Color.Yellow);
+        triggerMissed.Text("MISSED!");
+        if (player == 1)
+        {
+            RemoveScoreP1(50);
+            triggerMissed.SetXY(120, 100);
+        } 
+        else if (player == 2)
+        {
+            RemoveScoreP2(50);
+            triggerMissed.SetXY(1100, 100);
+        }
+        AddChild(triggerMissed);
+        Task.Delay(500).ContinueWith(t => { RemoveChild(triggerMissed); });
+    }
 
+    public void TriggerBad(int player)
+    {
+        triggerBad = new EasyDraw(500, 60);
+        triggerBad.TextFont(bangerFont);
+        triggerBad.TextAlign(CenterMode.Min, CenterMode.Center);
+        triggerBad.Fill(Color.Yellow);
+        triggerBad.Text("BAT ITEM!");
+        if (player == 1)
+        {
+            RemoveScoreP1(50);
+            triggerBad.SetXY(120, 100);
+        }
+        else if (player == 2)
+        {
+            RemoveScoreP2(50);
+            triggerBad.SetXY(1100, 100);
+        }
+        AddChild(triggerBad);
+        Task.Delay(500).ContinueWith(t => { RemoveChild(triggerBad);});
     }
 }

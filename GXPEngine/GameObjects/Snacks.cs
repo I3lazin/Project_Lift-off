@@ -51,10 +51,11 @@ public class Snacks : Sprite
         }
         if (y > 929)
         {
-            hud.TriggerMissed();
+            if (snackRow == 1 || snackRow == 2) { hud.TriggerMissed(1); }
+            else if (snackRow == 3 || snackRow == 4) { hud.TriggerMissed(2); }
             DestoryListSnack();
         }
-        if (y > 1088)
+        if (y > 930)
         {
             this.Destroy();
         }
