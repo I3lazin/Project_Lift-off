@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,7 @@ public class Level : Pivot
         CreateLevel();
         if (musicname != null)
         {
-            new Sound(musicname).Play();
+            Task.Delay(1000).ContinueWith(t => { new Sound(musicname).Play(); });
         }
     }
 
@@ -40,19 +41,46 @@ public class Level : Pivot
         loader.rootObject = background;
         loader.LoadImageLayers(0);
 
+        
         // Main Layer 1
-        loader.addColliders = true;
         Pivot mainlayer1 = new Pivot();
         AddChild(mainlayer1);
         loader.rootObject = mainlayer1;
         loader.LoadObjectGroups(0);
 
         // Main Layer 2
-        loader.addColliders = false;
         Pivot mainlayer2 = new Pivot();
         AddChild(mainlayer2);
         loader.rootObject = mainlayer2;
         loader.LoadObjectGroups(1);
+
+        // Seperate snacks into different Lists based off the row
+        Snacks[] snacks = mainlayer1.FindObjectsOfType<Snacks>();
+        Console.WriteLine("snacks length" + snacks.Length);
+        MyGame myGame = (MyGame)game;
+        foreach(Snacks snack in snacks)
+        {
+            switch (snack.snackRow)
+            {
+                case 1:
+                    myGame.snacks1.Add(snack);
+                    break;
+                case 2:
+                    myGame.snacks2.Add(snack);
+                    break;
+                case 3:
+                    myGame.snacks3.Add(snack);
+                    break;
+                case 4:
+                    myGame.snacks4.Add(snack);
+                    break;
+            }
+        }
+    }
+
+    void CreatingSnackLists()
+    {
+
     }
 
     void Update()

@@ -45,12 +45,12 @@ public class HUD : GameObject
 
     public void SetScoreP1() 
     {
-        Player1Score.Text(String.Format("Score {0:0000000}",ScoreP1), true);
+        Player1Score.Text(String.Format("Score: {0:0000000}",ScoreP1), true);
     }
 
     public void SetScoreP2()
     {
-        Player2Score.Text(String.Format("Score {0:0000000}", ScoreP2), true);
+        Player2Score.Text(String.Format("Score: {0:0000000}", ScoreP2), true);
     }
 
     public void AddScoreP1(int addedpoints)

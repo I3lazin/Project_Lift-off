@@ -10,11 +10,11 @@ using TiledMapParser;
 public class Snacks : Sprite
 {
     int currentLifeTimeMs = 0;
-    bool canmove = false;
-    int delayInMs;
-    float snackSpeed;
-    int snackRow;
-    int snackType;
+    public bool canmove = false;
+    public int delayInMs;
+    public float snackSpeed;
+    public int snackRow;
+    public int snackType;
     string[] snack = {"circle.png","checkers.png","colors.png","square.png","triangle.png"};
 
     public Snacks(TiledObject obj=null) : base("circle.png", false, true)
@@ -22,10 +22,6 @@ public class Snacks : Sprite
         Initialize(obj);
     }
 
-    public Snacks(string filename, TiledObject obj = null) : base(filename, true, true)
-    {
-        Initialize(obj);
-    }
 
     void Initialize(TiledObject obj = null)
     {
@@ -51,6 +47,10 @@ public class Snacks : Sprite
         if (canmove)
         {
             y = y + 1 * snackSpeed;
+        }
+        if (y > 900)
+        {
+            DestoryListSnack();
         }
         if (y > 1088)
         {
@@ -83,6 +83,29 @@ public class Snacks : Sprite
     void ChangeSprite()
     {
         initializeFromTexture(Texture2D.GetInstance(snack[snackType], true));
+    }
+
+    void DestoryListSnack()
+    {
+        MyGame myGame = (MyGame)game;
+        switch (snackRow)
+        {
+            case 1:
+                myGame.snacks1.Remove(this);
+                break;
+
+            case 2:
+                myGame.snacks2.Remove(this);
+                break;
+
+            case 3:
+                myGame.snacks3.Remove(this);
+                break;
+
+            case 4:
+                myGame.snacks4.Remove(this);
+                break;
+        }
     }
 }
 
