@@ -22,14 +22,14 @@ public class Level : Pivot
 
     public Level(string filename, string musicname)
     {
-        currentLevelName= filename;
+        currentLevelName = filename;
         loader = new TiledLoader(filename);
         CreateLevel();
-        HUD hud = new HUD();
         if (musicname != null)
         {
-            Task.Delay(1000).ContinueWith(t => { new Sound(musicname).Play(); });
+            Task.Delay(1000).ContinueWith(t => { new Sound(musicname,false,true).Play(); });
         }
+        HUD hud = new HUD();
     }
 
     void CreateLevel(bool includeImageLayers=true)

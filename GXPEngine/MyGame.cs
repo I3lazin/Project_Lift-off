@@ -9,6 +9,7 @@ using GXPEngine;                // GXPEngine contains the engine
 using TiledMapParser;
 
 public class MyGame : Game {
+    SoundChannel soundTrack;
     string nextlevel = null;
     string nextsong = null;
     public List<Snacks> snacks1 = new List<Snacks>();
@@ -19,7 +20,7 @@ public class MyGame : Game {
 
     public MyGame() : base(1920, 1080, false, false, 960, 540)
 	{
-        LoadLevel("Level1.tmx", "Testsong.wav");
+        LoadLevel("Level1.tmx", "Song1.mp3");
         OnAfterStep += CheckLoadLevel;
         game.targetFps = 60;
     }
