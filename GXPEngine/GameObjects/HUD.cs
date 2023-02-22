@@ -12,7 +12,6 @@ public class HUD : GameObject
     public bool canScore = true;
     int ScoreP1 = 0;
     int ScoreP2 = 0;
-    int waitingperiod = 500;
     EasyDraw Player1Score;
     EasyDraw Player2Score;
     EasyDraw triggerPerfect;
@@ -111,9 +110,10 @@ public class HUD : GameObject
                 AddScoreP2(200);
                 triggerPerfect.SetXY(1100, 100);
             }
+            AddChild(triggerPerfect);
+
+            RemoveChild(triggerPerfect);
         }
-        AddChild(triggerPerfect);
-        Task.Delay(waitingperiod).ContinueWith(t => { RemoveChild(triggerPerfect); });
     }
 
     public void TriggerGood(int player)
@@ -140,7 +140,8 @@ public class HUD : GameObject
                 triggerGood.SetXY(1100, 100);
             }
             AddChild(triggerGood);
-            Task.Delay(waitingperiod).ContinueWith(t => { RemoveChild(triggerGood); });
+
+            RemoveChild(triggerGood);
         }
     }
 
@@ -168,7 +169,8 @@ public class HUD : GameObject
                 triggerNormal.SetXY(1100, 100);
             }
             AddChild(triggerNormal);
-            Task.Delay(waitingperiod).ContinueWith(t => { RemoveChild(triggerNormal); });
+
+            RemoveChild(triggerNormal);
         }
     }
 
@@ -196,7 +198,8 @@ public class HUD : GameObject
                 triggerWrong.SetXY(1100, 100);
             }
             AddChild(triggerWrong);
-            Task.Delay(waitingperiod).ContinueWith(t => { RemoveChild(triggerWrong); });
+
+            RemoveChild(triggerWrong);
         }
     }
 
@@ -224,7 +227,8 @@ public class HUD : GameObject
                 triggerMissed.SetXY(1100, 100);
             }
             AddChild(triggerMissed);
-            Task.Delay(waitingperiod).ContinueWith(t => { RemoveChild(triggerMissed); });
+
+            RemoveChild(triggerMissed);
         }
     }
 
@@ -252,7 +256,8 @@ public class HUD : GameObject
                 triggerBad.SetXY(1100, 100);
             }
             AddChild(triggerBad);
-            Task.Delay(waitingperiod).ContinueWith(t => { RemoveChild(triggerBad); });
+
+            RemoveChild(triggerBad);
         }
     }
 
@@ -280,7 +285,12 @@ public class HUD : GameObject
                 triggerToFast.SetXY(1100, 100);
             }
             AddChild(triggerToFast);
-            Task.Delay(waitingperiod).ContinueWith(t => { RemoveChild(triggerToFast); });
+
+            RemoveChild(triggerToFast);   
         }
+    }
+    void Update()
+    {
+        
     }
 }

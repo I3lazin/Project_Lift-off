@@ -46,22 +46,22 @@ public class PlayerControl : Sprite
         }
 
         // Player 1
-        if (Input.GetKeyDown(Key.Q))
+        if (Input.GetKeyDown(Key.Q) && !Row1Disabled)
         {
             Console.WriteLine("Pressed: Q");
             return 1;
         }
-        if (Input.GetKeyDown(Key.W))
+        if (Input.GetKeyDown(Key.W) && !Row1Disabled)
         {
             Console.WriteLine("Pressed: W");
             return 2;
         }
-        if (Input.GetKeyDown(Key.E))
+        if (Input.GetKeyDown(Key.E) && !Row2Disabled)
         {
             Console.WriteLine("Pressed: E");
             return 3;
         }
-        if (Input.GetKeyDown(Key.R))
+        if (Input.GetKeyDown(Key.R) && !Row2Disabled)
         {
             Console.WriteLine("Pressed: R");
             return 4;
@@ -91,28 +91,24 @@ public class PlayerControl : Sprite
             }
         }
         // Player 2
-        if (Input.GetKeyDown(Key.O))
+        if (Input.GetKeyDown(Key.O) && !Row3Disabled)
         {
             Console.WriteLine("Pressed: O");
-            hud.AddScoreP2(100);
             return 1;
         }
-        if (Input.GetKeyDown(Key.P))
+        if (Input.GetKeyDown(Key.P) && !Row3Disabled)
         {
             Console.WriteLine("Pressed: P");
-            hud.AddScoreP2(100);
             return 2;
         }
-        if (Input.GetKeyDown(Key.SQ_BRACKET_1))
+        if (Input.GetKeyDown(Key.SQ_BRACKET_1) && !Row4Disabled)
         {
             Console.WriteLine("Pressed: [");
-            hud.AddScoreP2(100);
             return 3;
         }
-        if (Input.GetKeyDown(Key.SQ_BRACKET_2))
+        if (Input.GetKeyDown(Key.SQ_BRACKET_2) && !Row4Disabled)
         {
             Console.WriteLine("Pressed: ]");
-            hud.AddScoreP2(100);
             return 4;
         } 
         else
@@ -123,7 +119,6 @@ public class PlayerControl : Sprite
     
     int CheckSelectLevelInput()
     {
-        MyGame myGame = (MyGame)game;
         // Select level
         if (Input.GetKeyDown(Key.B))
         {
@@ -142,73 +137,44 @@ public class PlayerControl : Sprite
     }
 
 
-    void CorrectButton1(float y)
+    void CorrectButton(float y, Snacks snack, int player)
     {
         switch (y)
         {
             case float n when (n > 0 && n < 722):
-                snackLoader.DestoryListSnack(ClosestSnack1);
-                ClosestSnack1.Destroy();
-                hud.TriggerToFast(1);
+                snackLoader.DestoryListSnack(snack);
+                snack.Destroy();
+                hud.TriggerToFast(player);
                 break;
             case float n when (n > 840 && n < 860):
-                snackLoader.DestoryListSnack(ClosestSnack1);
-                ClosestSnack1.Destroy();
-                hud.TriggerPerfect(1);
+                snackLoader.DestoryListSnack(snack);
+                snack.Destroy();
+                hud.TriggerPerfect(player);
                 break;
             case float n when (n > 810 && n < 840 || n > 860 && n < 890):
-                snackLoader.DestoryListSnack(ClosestSnack1);
-                ClosestSnack1.Destroy();
-                hud.TriggerGood(1);
+                snackLoader.DestoryListSnack(snack);
+                snack.Destroy();
+                hud.TriggerGood(player);
                 break;
             case float n when (n > 722 && n < 810 || n > 860 && n < 928):
-                snackLoader.DestoryListSnack(ClosestSnack1);
-                ClosestSnack1.Destroy();
-                hud.TriggerNormal(1);
-                break;
-        }
-    }
-    void CorrectButton2(float y)
-    {
-        switch (y)
-        {
-            case float n when (n > 0 && n < 722):
-                snackLoader.DestoryListSnack(ClosestSnack2);
-                ClosestSnack2.Destroy();
-                hud.TriggerToFast(1);
-                break;
-            case float n when (n > 840 && n < 860):
-                snackLoader.DestoryListSnack(ClosestSnack2);
-                ClosestSnack2.Destroy();
-                hud.TriggerPerfect(1);
-                break;
-            case float n when (n > 810 && n < 840 || n > 860 && n < 890):
-                snackLoader.DestoryListSnack(ClosestSnack2);
-                ClosestSnack2.Destroy();
-                hud.TriggerGood(1);
-                break;
-            case float n when (n > 722 && n < 810 || n > 860 && n < 928):
-                snackLoader.DestoryListSnack(ClosestSnack2);
-                ClosestSnack2.Destroy();
-                hud.TriggerNormal(1);
+                snackLoader.DestoryListSnack(snack);
+                snack.Destroy();
+                hud.TriggerNormal(player);
                 break;
         }
     }
 
     void Update()
     {
-        MyGame myGame = (MyGame)game;
         if (hud == null) hud = game.FindObjectOfType<HUD>();
-
         switch (CheckInputPlayer1())
         {
             case 1:
-                if (Row1Disabled) { break; }
                 switch (ClosestSnack1.snackType)
                 {
                     case 0:
                         {
-                            CorrectButton1(ClosestSnack1.y);
+                            CorrectButton(ClosestSnack1.y, ClosestSnack1,1);
                             break;
                         }
                     case int n when (n > 0 && n < 4):
@@ -228,12 +194,11 @@ public class PlayerControl : Sprite
                 }
                 break;
             case 2:
-                if (Row1Disabled) { break; }
                 switch (ClosestSnack1.snackType)
                 {
                     case 1:
                         {
-                            CorrectButton1(ClosestSnack1.y);
+                            CorrectButton(ClosestSnack1.y, ClosestSnack1,1);
                             break;
                         }
                     case int n when (n > 1 && n < 4 && n == 0):
@@ -253,12 +218,11 @@ public class PlayerControl : Sprite
                 }
                 break;
             case 3:
-                if (Row2Disabled) { break; }
                 switch (ClosestSnack2.snackType)
                 {
                     case 2:
                         {
-                            CorrectButton2(ClosestSnack2.y);
+                            CorrectButton(ClosestSnack2.y, ClosestSnack2,1);
                             break;
                         }
                     case int n when (n >= 0 && n < 2 && n == 3):
@@ -278,12 +242,11 @@ public class PlayerControl : Sprite
                 }
                 break;
             case 4:
-                if (Row2Disabled) { break; }
                 switch (ClosestSnack2.snackType)
                 {
                     case 3:
                         {
-                            CorrectButton2(ClosestSnack2.y);
+                            CorrectButton(ClosestSnack2.y, ClosestSnack2,1);
                             break;
                         }
                     case int n when (n >= 0 && n < 3):
@@ -302,8 +265,9 @@ public class PlayerControl : Sprite
                         }
                 }
                 break;
+            case 0:
+                break;
         }
-        /**
         switch (CheckInputPlayer2())
         {
             case 1:
@@ -311,35 +275,19 @@ public class PlayerControl : Sprite
                 {
                     case 0:
                         {
-                            switch (ClosestSnack3.y)
-                            {
-                                case float n when (n > 0 && n < 722):
-                                    ClosestSnack3.Destroy();
-                                    hud.TriggerToFast(2);
-                                    break;
-                                case float n when (n > 840 && n < 860):
-                                    ClosestSnack3.Destroy();
-                                    hud.TriggerPerfect(2);
-                                    break;
-                                case float n when (n > 810 && n < 840 || n > 860 && n < 890):
-                                    ClosestSnack3.Destroy();
-                                    hud.TriggerGood(2);
-                                    break;
-                                case float n when (n > 722 && n < 810 || n > 860 && n < 928):
-                                    ClosestSnack3.Destroy();
-                                    hud.TriggerNormal(2);
-                                    break;
-                            }
+                            CorrectButton(ClosestSnack3.y, ClosestSnack3, 2);
                             break;
                         }
                     case int n when (n > 0 && n < 4):
                         {
+                            snackLoader.DestoryListSnack(ClosestSnack3);
                             ClosestSnack3.Destroy();
                             hud.TriggerWrong(2);
                             break;
                         }
                     case 4:
                         {
+                            snackLoader.DestoryListSnack(ClosestSnack3);
                             ClosestSnack3.Destroy();
                             hud.TriggerBad(2);
                             break;
@@ -351,35 +299,19 @@ public class PlayerControl : Sprite
                 {
                     case 1:
                         {
-                            switch (ClosestSnack3.y)
-                            {
-                                case float n when (n > 0 && n < 722):
-                                    ClosestSnack3.Destroy();
-                                    hud.TriggerToFast(2);
-                                    break;
-                                case float n when (n > 840 && n < 860):
-                                    ClosestSnack3.Destroy();
-                                    hud.TriggerPerfect(2);
-                                    break;
-                                case float n when (n > 810 && n < 840 || n > 860 && n < 890):
-                                    ClosestSnack3.Destroy();
-                                    hud.TriggerGood(2);
-                                    break;
-                                case float n when (n > 722 && n < 810 || n > 860 && n < 928):
-                                    ClosestSnack3.Destroy();
-                                    hud.TriggerNormal(2);
-                                    break;
-                            }
+                            CorrectButton(ClosestSnack3.y, ClosestSnack3, 2);
                             break;
                         }
                     case int n when (n > 1 && n < 4 && n == 0):
                         {
+                            snackLoader.DestoryListSnack(ClosestSnack3);
                             ClosestSnack3.Destroy();
                             hud.TriggerWrong(2);
                             break;
                         }
                     case 4:
                         {
+                            snackLoader.DestoryListSnack(ClosestSnack3);
                             ClosestSnack3.Destroy();
                             hud.TriggerBad(2);
                             break;
@@ -391,35 +323,19 @@ public class PlayerControl : Sprite
                 {
                     case 2:
                         {
-                            switch (ClosestSnack4.y)
-                            {
-                                case float n when (n > 0 && n < 722):
-                                    ClosestSnack4.Destroy();
-                                    hud.TriggerToFast(2);
-                                    break;
-                                case float n when (n > 840 && n < 860):
-                                    ClosestSnack4.Destroy();
-                                    hud.TriggerPerfect(2);
-                                    break;
-                                case float n when (n > 810 && n < 840 || n > 860 && n < 890):
-                                    ClosestSnack4.Destroy();
-                                    hud.TriggerGood(2);
-                                    break;
-                                case float n when (n > 722 && n < 810 || n > 860 && n < 928):
-                                    ClosestSnack4.Destroy();
-                                    hud.TriggerNormal(2);
-                                    break;
-                            }
+                            CorrectButton(ClosestSnack4.y, ClosestSnack4, 2);
                             break;
                         }
                     case int n when (n >= 0 && n < 2 && n == 3):
                         {
+                            snackLoader.DestoryListSnack(ClosestSnack4);
                             ClosestSnack4.Destroy();
                             hud.TriggerWrong(2);
                             break;
                         }
                     case 4:
                         {
+                            snackLoader.DestoryListSnack(ClosestSnack4);
                             ClosestSnack4.Destroy();
                             hud.TriggerBad(2);
                             break;
@@ -427,46 +343,31 @@ public class PlayerControl : Sprite
                 }
                 break;
             case 4:
-                switch (ClosestSnack4.snackType)
+                switch (ClosestSnack2.snackType)
                 {
                     case 3:
                         {
-                            switch (ClosestSnack4.y)
-                            {
-                                case float n when (n > 0 && n < 722):
-                                    ClosestSnack4.Destroy();
-                                    hud.TriggerToFast(2);
-                                    break;
-                                case float n when (n > 840 && n < 860):
-                                    ClosestSnack4.Destroy();
-                                    hud.TriggerPerfect(2);
-                                    break;
-                                case float n when (n > 810 && n < 840 || n > 860 && n < 890):
-                                    ClosestSnack4.Destroy();
-                                    hud.TriggerGood(2);
-                                    break;
-                                case float n when (n > 722 && n < 810 || n > 860 && n < 928):
-                                    ClosestSnack4.Destroy();
-                                    hud.TriggerNormal(2);
-                                    break;
-                            }
+                            CorrectButton(ClosestSnack4.y, ClosestSnack4, 2);
                             break;
                         }
                     case int n when (n >= 0 && n < 3):
                         {
+                            snackLoader.DestoryListSnack(ClosestSnack4);
                             ClosestSnack4.Destroy();
                             hud.TriggerWrong(2);
                             break;
                         }
                     case 4:
                         {
+                            snackLoader.DestoryListSnack(ClosestSnack4);
                             ClosestSnack4.Destroy();
                             hud.TriggerBad(2);
                             break;
                         }
                 }
                 break;
+            case 0:
+                break;
         }
-        **/
     }
 }

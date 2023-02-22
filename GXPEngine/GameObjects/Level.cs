@@ -12,6 +12,7 @@ public class Level : Pivot
     TiledLoader loader;
     public string currentLevelName;
 
+
     public Level(string filename)
     {
         currentLevelName = filename;
@@ -24,6 +25,7 @@ public class Level : Pivot
         currentLevelName= filename;
         loader = new TiledLoader(filename);
         CreateLevel();
+        HUD hud = new HUD();
         if (musicname != null)
         {
             Task.Delay(1000).ContinueWith(t => { new Sound(musicname).Play(); });
@@ -57,7 +59,7 @@ public class Level : Pivot
         // Seperate snacks into different Lists based off the row
         Snacks[] snacks = mainlayer1.FindObjectsOfType<Snacks>();
         MyGame myGame = (MyGame)game;
-        foreach(Snacks snack in snacks)
+        foreach (Snacks snack in snacks)
         {
             switch (snack.snackRow)
             {
