@@ -9,13 +9,18 @@ using TiledMapParser;
 public class PlayerControl : Sprite
 {
     HUD hud = null;
+    public bool Row1Disabled = false;
+    public bool Row2Disabled = false;
+    public bool Row3Disabled = false;
+    public bool Row4Disabled = false;
+    Snacks snackLoader = new Snacks();
     Snacks ClosestSnack1 = new Snacks();
     Snacks ClosestSnack2 = new Snacks();
     Snacks ClosestSnack3 = new Snacks();
     Snacks ClosestSnack4 = new Snacks();
     public Level myLevel;
 
-    public PlayerControl(TiledObject obj = null) : base("Blank.png", false, true)
+    public PlayerControl(TiledObject obj = null) : base("circle.png", false, true)
     {
         
     }
@@ -73,11 +78,17 @@ public class PlayerControl : Sprite
         MyGame myGame = (MyGame)game;
         foreach (Snacks snack in myGame.snacks3)
         {
-
+            if (snack.y > ClosestSnack3.y || ClosestSnack3 == null)
+            {
+                ClosestSnack3 = snack;
+            }
         }
         foreach (Snacks snack in myGame.snacks4)
         {
-
+            if (snack.y > ClosestSnack4.y || ClosestSnack4 == null)
+            {
+                ClosestSnack4 = snack;
+            }
         }
         // Player 2
         if (Input.GetKeyDown(Key.O))
@@ -130,255 +141,332 @@ public class PlayerControl : Sprite
         }
     }
 
+
+    void CorrectButton1(float y)
+    {
+        switch (y)
+        {
+            case float n when (n > 0 && n < 722):
+                snackLoader.DestoryListSnack(ClosestSnack1);
+                ClosestSnack1.Destroy();
+                hud.TriggerToFast(1);
+                break;
+            case float n when (n > 840 && n < 860):
+                snackLoader.DestoryListSnack(ClosestSnack1);
+                ClosestSnack1.Destroy();
+                hud.TriggerPerfect(1);
+                break;
+            case float n when (n > 810 && n < 840 || n > 860 && n < 890):
+                snackLoader.DestoryListSnack(ClosestSnack1);
+                ClosestSnack1.Destroy();
+                hud.TriggerGood(1);
+                break;
+            case float n when (n > 722 && n < 810 || n > 860 && n < 928):
+                snackLoader.DestoryListSnack(ClosestSnack1);
+                ClosestSnack1.Destroy();
+                hud.TriggerNormal(1);
+                break;
+        }
+    }
+    void CorrectButton2(float y)
+    {
+        switch (y)
+        {
+            case float n when (n > 0 && n < 722):
+                snackLoader.DestoryListSnack(ClosestSnack2);
+                ClosestSnack2.Destroy();
+                hud.TriggerToFast(1);
+                break;
+            case float n when (n > 840 && n < 860):
+                snackLoader.DestoryListSnack(ClosestSnack2);
+                ClosestSnack2.Destroy();
+                hud.TriggerPerfect(1);
+                break;
+            case float n when (n > 810 && n < 840 || n > 860 && n < 890):
+                snackLoader.DestoryListSnack(ClosestSnack2);
+                ClosestSnack2.Destroy();
+                hud.TriggerGood(1);
+                break;
+            case float n when (n > 722 && n < 810 || n > 860 && n < 928):
+                snackLoader.DestoryListSnack(ClosestSnack2);
+                ClosestSnack2.Destroy();
+                hud.TriggerNormal(1);
+                break;
+        }
+    }
+
     void Update()
     {
         MyGame myGame = (MyGame)game;
         if (hud == null) hud = game.FindObjectOfType<HUD>();
-        //Not ideal to call findobjectsoftype in Update
-        //snacks = game.FindObjectsOfType<Snacks>();
 
         switch (CheckInputPlayer1())
         {
             case 1:
-                if (ClosestSnack1.snackType == 0)
+                if (Row1Disabled) { break; }
+                switch (ClosestSnack1.snackType)
                 {
-                    switch (ClosestSnack1.y)
-                    {
-                        case float n when (n > 840 && n < 860):
-                            ClosestSnack1.Destroy();
-                            hud.TriggerPerfect(1);
+                    case 0:
+                        {
+                            CorrectButton1(ClosestSnack1.y);
                             break;
-                        case float n when (n > 810 && n < 840 || n > 860 && n < 890):
+                        }
+                    case int n when (n > 0 && n < 4):
+                        {
+                            snackLoader.DestoryListSnack(ClosestSnack1);
                             ClosestSnack1.Destroy();
-                            hud.TriggerGood(1);
+                            hud.TriggerWrong(1);
                             break;
-                        case float n when (n > 722 && n < 810 || n > 860 && n < 928):
+                        }
+                    case 4:
+                        {
+                            snackLoader.DestoryListSnack(ClosestSnack1);
                             ClosestSnack1.Destroy();
-                            hud.TriggerNormal(1);
+                            hud.TriggerBad(1);
                             break;
-                    }
-                } 
-                else if (ClosestSnack1.snackType == 4)
-                {
-                    ClosestSnack1.Destroy();
-                    hud.TriggerBad(1);
-                } 
-                else 
-                {
-                    ClosestSnack1.Destroy();
-                    hud.TriggerWrong(1);  
+                        }
                 }
                 break;
             case 2:
-                if (ClosestSnack1.snackType == 1)
+                if (Row1Disabled) { break; }
+                switch (ClosestSnack1.snackType)
                 {
-                    switch (ClosestSnack1.y)
-                    {
-                        case float n when (n > 840 && n < 860):
-                            ClosestSnack1.Destroy();
-                            hud.TriggerPerfect(1);
+                    case 1:
+                        {
+                            CorrectButton1(ClosestSnack1.y);
                             break;
-                        case float n when (n > 810 && n < 840 || n > 860 && n < 890):
+                        }
+                    case int n when (n > 1 && n < 4 && n == 0):
+                        {
+                            snackLoader.DestoryListSnack(ClosestSnack1);
                             ClosestSnack1.Destroy();
-                            hud.TriggerGood(1);
+                            hud.TriggerWrong(1);
                             break;
-                        case float n when (n > 722 && n < 810 || n > 860 && n < 928):
+                        }
+                    case 4:
+                        {
+                            snackLoader.DestoryListSnack(ClosestSnack1);
                             ClosestSnack1.Destroy();
-                            hud.TriggerNormal(1);
+                            hud.TriggerBad(1);
                             break;
-                    }
-                }
-                else if (ClosestSnack1.snackType == 4)
-                {
-                    ClosestSnack1.Destroy();
-                    hud.TriggerBad(1);
-                }
-                else
-                {
-                    ClosestSnack1.Destroy();
-                    hud.TriggerWrong(1);
+                        }
                 }
                 break;
             case 3:
-                if (ClosestSnack2.snackType == 2)
+                if (Row2Disabled) { break; }
+                switch (ClosestSnack2.snackType)
                 {
-                    switch (ClosestSnack2.y)
-                    {
-                        case float n when (n > 840 && n < 860):
-                            ClosestSnack2.Destroy();
-                            hud.TriggerPerfect(1);
+                    case 2:
+                        {
+                            CorrectButton2(ClosestSnack2.y);
                             break;
-                        case float n when (n > 810 && n < 840 || n > 860 && n < 890):
+                        }
+                    case int n when (n >= 0 && n < 2 && n == 3):
+                        {
+                            snackLoader.DestoryListSnack(ClosestSnack2);
                             ClosestSnack2.Destroy();
-                            hud.TriggerGood(1);
+                            hud.TriggerWrong(1);
                             break;
-                        case float n when (n > 722 && n < 810 || n > 860 && n < 928):
+                        }
+                    case 4:
+                        {
+                            snackLoader.DestoryListSnack(ClosestSnack2);
                             ClosestSnack2.Destroy();
-                            hud.TriggerNormal(1);
+                            hud.TriggerBad(1);
                             break;
-                    }
-                }
-                else if (ClosestSnack2.snackType == 4)
-                {
-                    ClosestSnack2.Destroy();
-                    hud.TriggerBad(1);
-                }
-                else
-                {
-                    ClosestSnack2.Destroy();
-                    hud.TriggerWrong(1);
+                        }
                 }
                 break;
             case 4:
-                if (ClosestSnack2.snackType == 3)
+                if (Row2Disabled) { break; }
+                switch (ClosestSnack2.snackType)
                 {
-                    switch (ClosestSnack2.y)
-                    {
-                        case float n when (n > 840 && n < 860):
-                            hud.TriggerPerfect(1);
+                    case 3:
+                        {
+                            CorrectButton2(ClosestSnack2.y);
                             break;
-                        case float n when (n > 810 && n < 840 || n > 860 && n < 890):
-                            hud.TriggerGood(1);
+                        }
+                    case int n when (n >= 0 && n < 3):
+                        {
+                            snackLoader.DestoryListSnack(ClosestSnack2);
+                            ClosestSnack2.Destroy();
+                            hud.TriggerWrong(1);
                             break;
-                        case float n when (n > 722 && n < 810 || n > 860 && n < 928):
-                            hud.TriggerNormal(1);
+                        }
+                    case 4:
+                        {
+                            snackLoader.DestoryListSnack(ClosestSnack2);
+                            ClosestSnack2.Destroy();
+                            hud.TriggerBad(1);
                             break;
-                    }
-                }
-                else if (ClosestSnack2.snackType == 4)
-                {
-                    ClosestSnack2.Destroy();
-                    hud.TriggerBad(1);
-                }
-                else
-                {
-                    ClosestSnack2.Destroy();
-                    hud.TriggerWrong(1);
+                        }
                 }
                 break;
         }
+        /**
         switch (CheckInputPlayer2())
         {
             case 1:
-                if (ClosestSnack3.snackType == 0)
+                switch (ClosestSnack3.snackType)
                 {
-                    switch (ClosestSnack3.y)
-                    {
-                        case float n when (n > 840 && n < 860):
-                            ClosestSnack3.Destroy();
-                            hud.TriggerPerfect(2);
+                    case 0:
+                        {
+                            switch (ClosestSnack3.y)
+                            {
+                                case float n when (n > 0 && n < 722):
+                                    ClosestSnack3.Destroy();
+                                    hud.TriggerToFast(2);
+                                    break;
+                                case float n when (n > 840 && n < 860):
+                                    ClosestSnack3.Destroy();
+                                    hud.TriggerPerfect(2);
+                                    break;
+                                case float n when (n > 810 && n < 840 || n > 860 && n < 890):
+                                    ClosestSnack3.Destroy();
+                                    hud.TriggerGood(2);
+                                    break;
+                                case float n when (n > 722 && n < 810 || n > 860 && n < 928):
+                                    ClosestSnack3.Destroy();
+                                    hud.TriggerNormal(2);
+                                    break;
+                            }
                             break;
-                        case float n when (n > 810 && n < 840 || n > 860 && n < 890):
+                        }
+                    case int n when (n > 0 && n < 4):
+                        {
                             ClosestSnack3.Destroy();
-                            hud.TriggerGood(2);
+                            hud.TriggerWrong(2);
                             break;
-                        case float n when (n > 722 && n < 810 || n > 860 && n < 928):
+                        }
+                    case 4:
+                        {
                             ClosestSnack3.Destroy();
-                            hud.TriggerNormal(2);
+                            hud.TriggerBad(2);
                             break;
-                    }
-                }
-                else if (ClosestSnack3.snackType == 4)
-                {
-                    ClosestSnack3.Destroy();
-                    hud.TriggerBad(2);
-                }
-                else
-                {
-                    ClosestSnack3.Destroy();
-                    hud.TriggerWrong(2);
+                        }
                 }
                 break;
             case 2:
-                if (ClosestSnack3.snackType == 1)
+                switch (ClosestSnack3.snackType)
                 {
-                    switch (ClosestSnack3.y)
-                    {
-                        case float n when (n > 840 && n < 860):
-                            ClosestSnack3.Destroy();
-                            hud.TriggerPerfect(2);
+                    case 1:
+                        {
+                            switch (ClosestSnack3.y)
+                            {
+                                case float n when (n > 0 && n < 722):
+                                    ClosestSnack3.Destroy();
+                                    hud.TriggerToFast(2);
+                                    break;
+                                case float n when (n > 840 && n < 860):
+                                    ClosestSnack3.Destroy();
+                                    hud.TriggerPerfect(2);
+                                    break;
+                                case float n when (n > 810 && n < 840 || n > 860 && n < 890):
+                                    ClosestSnack3.Destroy();
+                                    hud.TriggerGood(2);
+                                    break;
+                                case float n when (n > 722 && n < 810 || n > 860 && n < 928):
+                                    ClosestSnack3.Destroy();
+                                    hud.TriggerNormal(2);
+                                    break;
+                            }
                             break;
-                        case float n when (n > 810 && n < 840 || n > 860 && n < 890):
+                        }
+                    case int n when (n > 1 && n < 4 && n == 0):
+                        {
                             ClosestSnack3.Destroy();
-                            hud.TriggerGood(2);
+                            hud.TriggerWrong(2);
                             break;
-                        case float n when (n > 722 && n < 810 || n > 860 && n < 928):
+                        }
+                    case 4:
+                        {
                             ClosestSnack3.Destroy();
-                            hud.TriggerNormal(2);
+                            hud.TriggerBad(2);
                             break;
-                    }
-                }
-                else if (ClosestSnack3.snackType == 4)
-                {
-                    ClosestSnack3.Destroy();
-                    hud.TriggerBad(2);
-                }
-                else
-                {
-                    ClosestSnack3.Destroy();
-                    hud.TriggerWrong(2);
+                        }
                 }
                 break;
             case 3:
-                if (ClosestSnack4.snackType == 2)
+                switch (ClosestSnack4.snackType)
                 {
-                    switch (ClosestSnack4.y)
-                    {
-                        case float n when (n > 840 && n < 860):
-                            ClosestSnack4.Destroy();
-                            hud.TriggerPerfect(2);
+                    case 2:
+                        {
+                            switch (ClosestSnack4.y)
+                            {
+                                case float n when (n > 0 && n < 722):
+                                    ClosestSnack4.Destroy();
+                                    hud.TriggerToFast(2);
+                                    break;
+                                case float n when (n > 840 && n < 860):
+                                    ClosestSnack4.Destroy();
+                                    hud.TriggerPerfect(2);
+                                    break;
+                                case float n when (n > 810 && n < 840 || n > 860 && n < 890):
+                                    ClosestSnack4.Destroy();
+                                    hud.TriggerGood(2);
+                                    break;
+                                case float n when (n > 722 && n < 810 || n > 860 && n < 928):
+                                    ClosestSnack4.Destroy();
+                                    hud.TriggerNormal(2);
+                                    break;
+                            }
                             break;
-                        case float n when (n > 810 && n < 840 || n > 860 && n < 890):
+                        }
+                    case int n when (n >= 0 && n < 2 && n == 3):
+                        {
                             ClosestSnack4.Destroy();
-                            hud.TriggerGood(2);
+                            hud.TriggerWrong(2);
                             break;
-                        case float n when (n > 722 && n < 810 || n > 860 && n < 928):
+                        }
+                    case 4:
+                        {
                             ClosestSnack4.Destroy();
-                            hud.TriggerNormal(2);
+                            hud.TriggerBad(2);
                             break;
-                    }
-                }
-                else if (ClosestSnack4.snackType == 4)
-                {
-                    ClosestSnack4.Destroy();
-                    hud.TriggerBad(2);
-                }
-                else
-                {
-                    ClosestSnack4.Destroy();
-                    hud.TriggerWrong(2);
+                        }
                 }
                 break;
             case 4:
-                if (ClosestSnack4.snackType == 3)
+                switch (ClosestSnack4.snackType)
                 {
-                    switch (ClosestSnack4.y)
-                    {
-                        case float n when (n > 840 && n < 860):
-                            ClosestSnack4.Destroy();
-                            hud.TriggerPerfect(2);
+                    case 3:
+                        {
+                            switch (ClosestSnack4.y)
+                            {
+                                case float n when (n > 0 && n < 722):
+                                    ClosestSnack4.Destroy();
+                                    hud.TriggerToFast(2);
+                                    break;
+                                case float n when (n > 840 && n < 860):
+                                    ClosestSnack4.Destroy();
+                                    hud.TriggerPerfect(2);
+                                    break;
+                                case float n when (n > 810 && n < 840 || n > 860 && n < 890):
+                                    ClosestSnack4.Destroy();
+                                    hud.TriggerGood(2);
+                                    break;
+                                case float n when (n > 722 && n < 810 || n > 860 && n < 928):
+                                    ClosestSnack4.Destroy();
+                                    hud.TriggerNormal(2);
+                                    break;
+                            }
                             break;
-                        case float n when (n > 810 && n < 840 || n > 860 && n < 890):
+                        }
+                    case int n when (n >= 0 && n < 3):
+                        {
                             ClosestSnack4.Destroy();
-                            hud.TriggerGood(2);
+                            hud.TriggerWrong(2);
                             break;
-                        case float n when (n > 722 && n < 810 || n > 860 && n < 928):
+                        }
+                    case 4:
+                        {
                             ClosestSnack4.Destroy();
-                            hud.TriggerNormal(2);
+                            hud.TriggerBad(2);
                             break;
-                    }
-                }
-                else if (ClosestSnack4.snackType == 4)
-                {
-                    ClosestSnack4.Destroy();
-                    hud.TriggerBad(2);
-                }
-                else
-                {
-                    ClosestSnack4.Destroy();
-                    hud.TriggerWrong(2);
+                        }
                 }
                 break;
         }
+        **/
     }
 }

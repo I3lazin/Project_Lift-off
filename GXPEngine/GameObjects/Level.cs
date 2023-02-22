@@ -56,7 +56,6 @@ public class Level : Pivot
 
         // Seperate snacks into different Lists based off the row
         Snacks[] snacks = mainlayer1.FindObjectsOfType<Snacks>();
-        Console.WriteLine("snacks length" + snacks.Length);
         MyGame myGame = (MyGame)game;
         foreach(Snacks snack in snacks)
         {
@@ -76,11 +75,6 @@ public class Level : Pivot
                     break;
             }
         }
-    }
-
-    void CreatingSnackLists()
-    {
-
     }
 
     void Update()

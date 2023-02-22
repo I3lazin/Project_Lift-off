@@ -20,6 +20,7 @@ public class MyGame : Game {
 	{
         LoadLevel("Level1.tmx", "Testsong.wav");
         OnAfterStep += CheckLoadLevel;
+        game.targetFps = 60;
     }
 
     void DestroyAll()

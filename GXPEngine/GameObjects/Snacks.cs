@@ -10,6 +10,7 @@ using TiledMapParser;
 public class Snacks : Sprite
 {
     HUD hud = new HUD();
+    PlayerControl controls = null;
     int currentLifeTimeMs = 0;
     public bool canmove = false;
     public int delayInMs;
@@ -41,6 +42,8 @@ public class Snacks : Sprite
 
     void Update()
     {
+        if (controls == null) { controls = game.FindObjectOfType<PlayerControl>(); }
+        MyGame myGame = (MyGame)game;
         if (Time.time - currentLifeTimeMs >= delayInMs)
         {
             canmove = true;
@@ -53,16 +56,21 @@ public class Snacks : Sprite
         {
             if (snackRow == 1 || snackRow == 2) { hud.TriggerMissed(1); }
             else if (snackRow == 3 || snackRow == 4) { hud.TriggerMissed(2); }
-            DestoryListSnack();
+            DestoryListSnack(this);
         }
         if (y > 930)
         {
             this.Destroy();
         }
+        if (myGame.snacks1.Count == 0 && myGame.snacks2.Count == 0 && myGame.snacks3.Count == 0 && myGame.snacks4.Count == 0)
+        {
+            hud.canScore = false;
+        }
     }
 
     void ChangeX()
     {
+
         switch (snackRow - 1)
         {
             case 0:
@@ -88,25 +96,25 @@ public class Snacks : Sprite
         initializeFromTexture(Texture2D.GetInstance(snack[snackType], true));
     }
 
-    void DestoryListSnack()
+    public void DestoryListSnack(Snacks obj)
     {
         MyGame myGame = (MyGame)game;
-        switch (snackRow)
+        switch (obj.snackRow)
         {
             case 1:
-                myGame.snacks1.Remove(this);
+                myGame.snacks1.Remove(obj);
                 break;
 
             case 2:
-                myGame.snacks2.Remove(this);
+                myGame.snacks2.Remove(obj);
                 break;
 
             case 3:
-                myGame.snacks3.Remove(this);
+                myGame.snacks3.Remove(obj);
                 break;
 
             case 4:
-                myGame.snacks4.Remove(this);
+                myGame.snacks4.Remove(obj);
                 break;
         }
     }
