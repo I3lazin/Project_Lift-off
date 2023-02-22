@@ -41,6 +41,7 @@ public class Snacks : Sprite
 
     void Update()
     {
+        ChangeX();
         if (hud == null) hud = game.FindObjectOfType<HUD>();
         MyGame myGame = (MyGame)game;
         if (Time.time - currentLifeTimeMs >= delayInMs)
@@ -142,5 +143,6 @@ public class Snacks : Sprite
                 break;
         }
     }
+
 }
 
