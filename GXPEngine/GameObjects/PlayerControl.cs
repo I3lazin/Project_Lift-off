@@ -29,21 +29,8 @@ public class PlayerControl : Sprite
     {
         //get snack item lists row 1 & 2
         MyGame myGame = (MyGame)game;
-        foreach (Snacks snack in myGame.snacks1)
-        {
-            if (snack.y > ClosestSnack1.y || ClosestSnack1 == null)
-            {
-                ClosestSnack1 = snack;
-            }
-            
-        }
-        foreach (Snacks snack in myGame.snacks2)
-        {
-            if (snack.y > ClosestSnack2.y || ClosestSnack2 == null)
-            {
-                ClosestSnack2 = snack;
-            }
-        }
+        ClosestSnack1 = myGame.snacks1[0];
+        ClosestSnack2 = myGame.snacks2[0];
 
         // Player 1
         if (Input.GetKeyDown(Key.Q) && !Row1Disabled)
@@ -76,20 +63,8 @@ public class PlayerControl : Sprite
     {
         //get snack item lists row 3 & 4
         MyGame myGame = (MyGame)game;
-        foreach (Snacks snack in myGame.snacks3)
-        {
-            if (snack.y > ClosestSnack3.y || ClosestSnack3 == null)
-            {
-                ClosestSnack3 = snack;
-            }
-        }
-        foreach (Snacks snack in myGame.snacks4)
-        {
-            if (snack.y > ClosestSnack4.y || ClosestSnack4 == null)
-            {
-                ClosestSnack4 = snack;
-            }
-        }
+        ClosestSnack3 = myGame.snacks3[0];
+        ClosestSnack4 = myGame.snacks4[0];
         // Player 2
         if (Input.GetKeyDown(Key.O) && !Row3Disabled)
         {

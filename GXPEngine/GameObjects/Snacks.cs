@@ -10,6 +10,7 @@ using TiledMapParser;
 public class Snacks : Sprite
 {
     HUD hud = null;
+    int initializationvalue = 0;
     int currentLifeTimeMs = 0;
     public bool canmove = false;
     public int delayInMs;
@@ -41,7 +42,12 @@ public class Snacks : Sprite
 
     void Update()
     {
-        ChangeX();
+        if (initializationvalue == 0)
+        {
+            ChangeX();
+            initializationvalue = 1;
+        }
+
         if (hud == null) hud = game.FindObjectOfType<HUD>();
         MyGame myGame = (MyGame)game;
         if (Time.time - currentLifeTimeMs >= delayInMs)
@@ -114,7 +120,6 @@ public class Snacks : Sprite
                 Console.WriteLine("Removed from list 1: {0}",numberOfSnacks1);
                 if (myGame.snacks1.Count == 0) { myGame.controls.Row1Disabled = true;}
                 myGame.snacks1.Remove(obj);
-
                 Console.WriteLine("Removed from list 1: {0}",numberOfSnacks1);
                 break;
 

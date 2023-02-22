@@ -4,6 +4,7 @@
   <image source="../../../../../../Downloads/F703B2D3-9A7A-4C9E-8D45-B343BEDDF00B.jpg" width="1920" height="1080"/>
  </imagelayer>
  <objectgroup color="#ff0000" id="3" name="Object Layer 1" tintcolor="#ff0000">
+  <object id="0" name="PlayerControl" class="PlayerControl" x="640" y="834" width="672" height="32"/>
   <object id="1" name="Snacks" class="Snacks" x="672" y="-128" width="128" height="128">
    <properties>
     <property name="delayInMs" type="int" value="480"/>
