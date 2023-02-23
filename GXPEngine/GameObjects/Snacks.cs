@@ -20,7 +20,7 @@ public class Snacks : Sprite
     public int snackType;
     string[] snack = {"Snack0.png","Snack1.png","Snack2.png","Snack3.png","triangle.png"};
 
-    public Snacks(TiledObject obj=null) : base("triangle.png", false, true)
+    public Snacks(TiledObject obj = null) : base("triangle.png", false, false)
     {
         Initialize(obj);
     }
@@ -28,7 +28,6 @@ public class Snacks : Sprite
 
     void Initialize(TiledObject obj = null)
     {
-        collider.isTrigger= true;
         if (obj != null)
         {
             delayInMs = obj.GetIntProperty("delayInMs", 2000);
@@ -51,7 +50,7 @@ public class Snacks : Sprite
 
         if (hud == null) hud = game.FindObjectOfType<HUD>();
         MyGame myGame = (MyGame)game;
-        if (Time.time - currentLifeTimeMs >= delayInMs)
+        if (Time.time - currentLifeTimeMs >= delayInMs + 12700)
         {
             canmove = true;
         }

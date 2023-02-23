@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="1002">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="8" nextobjectid="1004">
  <imagelayer id="2" name="Image Layer 1">
   <image source="final background.jpg" width="2560" height="1440"/>
  </imagelayer>
- <objectgroup color="#ff0000" id="3" name="Object Layer 1" tintcolor="#ff0000">
+ <objectgroup color="#ff0000" id="3" name="Object Layer 1" visible="0" tintcolor="#ff0000">
   <object id="1001" name="PlayerControl" class="PlayerControl" x="852" y="1051.19" width="874" height="41.619"/>
   <object id="1" name="Snacks" class="Snacks" x="672" y="-128" width="128" height="128">
    <properties>
@@ -7995,6 +7995,18 @@
     <property name="snackRow" type="int" value="3"/>
     <property name="snackSpeed" type="float" value="4"/>
     <property name="snackType" type="int" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <objectgroup id="7" name="Object Layer 2">
+  <object id="1002" name="PlayerAnimation" class="PlayerAnimation" x="-160" y="422" width="200" height="400">
+   <properties>
+    <property name="CharacterType" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="1003" name="PlayerAnimation" class="PlayerAnimation" x="1792" y="422" width="200" height="400">
+   <properties>
+    <property name="CharacterType" type="int" value="1"/>
    </properties>
   </object>
  </objectgroup>

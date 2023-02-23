@@ -9,6 +9,9 @@ using TiledMapParser;
 
 public class PlayerControl : Sprite
 {
+    PlayerAnimation anim1 = null;
+    PlayerAnimation anim2 = null;
+    PlayerAnimation[] animList;
     HUD hud = null;
     int barheight = 1050;
     public bool Row1Disabled = false;
@@ -27,7 +30,7 @@ public class PlayerControl : Sprite
         
     }
 
-    public async void CheckInputPlayer1()
+    public void CheckInputPlayer1()
     {
         //get snack item lists row 1 & 2
         MyGame myGame = (MyGame)game;
@@ -57,7 +60,7 @@ public class PlayerControl : Sprite
         }
     }
 
-    public async void CheckInputPlayer2()
+    public void CheckInputPlayer2()
     {
         //get snack item lists row 3 & 4
         MyGame myGame = (MyGame)game;
@@ -87,7 +90,7 @@ public class PlayerControl : Sprite
         } 
     }
     
-    public async void CheckSelectLevelInput()
+    public void CheckSelectLevelInput()
     {
         // Select level
         if (Input.GetKeyDown(Key.B))
@@ -132,6 +135,8 @@ public class PlayerControl : Sprite
         if (snack.snackType == input)
         {
             CorrectHeight(snack.y, snack, player);
+            if (player == 1) { anim1.Hit(1); } else if (player == 2) { anim2.Hit(2); }
+            
         }
         else if (snack.snackType == 4)
         {
@@ -148,5 +153,11 @@ public class PlayerControl : Sprite
     void Update()
     {
         if (hud == null) hud = game.FindObjectOfType<HUD>();
+        if (anim1 == null || anim2 == null) 
+        { 
+            animList = game.FindObjectsOfType<PlayerAnimation>();
+            anim1 = animList[0];
+            anim2 = animList[1];
+        }
     }
 }

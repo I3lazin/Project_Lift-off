@@ -29,7 +29,7 @@ public class Level : Pivot
         CreateLevel();
         if (musicfilename != null)
         {
-            Task.Delay(1200).ContinueWith(t => { new Sound(musicfilename,false,true).Play(); });
+            Task.Delay(200).ContinueWith(t => { new Sound(musicfilename,false,true).Play(); });
         }
         HUD hud = new HUD();
     }
