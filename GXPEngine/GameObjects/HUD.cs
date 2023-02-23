@@ -25,7 +25,9 @@ public class HUD : GameObject
         Player1Score = new EasyDraw(700, 90);
         Player1Score.TextFont(bangerFont);
         Player1Score.TextAlign(CenterMode.Min,CenterMode.Center);
-        Player1Score.Fill(Color.Yellow);
+        Player1Score.Fill(Color.Black, 192);
+        Player1Score.Rect(0, 0, 1130, 130);
+        Player1Score.Fill(Color.FromArgb(255,230,230,0));
         Player1Score.Text("Score: 000000");
         Player1Score.SetXY(120, 1350);
         AddChild(Player1Score);
@@ -34,7 +36,9 @@ public class HUD : GameObject
         Player2Score = new EasyDraw(700, 90);
         Player2Score.TextFont(bangerFont);
         Player2Score.TextAlign(CenterMode.Min, CenterMode.Center);
-        Player2Score.Fill(Color.Yellow);
+        Player2Score.Fill(Color.Black, 192);
+        Player2Score.Rect(0, 0, 1130, 130);
+        Player2Score.Fill(Color.FromArgb(255,230,230,0));
         Player2Score.Text("Score: 000000");
         Player2Score.SetXY(1930, 1350);
         AddChild(Player2Score);
@@ -43,14 +47,18 @@ public class HUD : GameObject
         trigger1 = new EasyDraw(500, 90);
         trigger1.TextFont(bangerFont);
         trigger1.TextAlign(CenterMode.Min, CenterMode.Center);
+        trigger1.Stroke(Color.Black, 255);
+        trigger1.StrokeWeight(2);
         trigger1.Fill(Color.Yellow);
         trigger1.SetXY(120, 100);
         AddChild(trigger1);
 
         //Player 2 Feeback
-        trigger2 = new EasyDraw(500, 80);
+        trigger2 = new EasyDraw(500, 90);
         trigger2.TextFont(bangerFont);
         trigger2.TextAlign(CenterMode.Min, CenterMode.Center);
+        trigger2.Stroke(Color.Black, 255);
+        trigger2.StrokeWeight(2);
         trigger2.Fill(Color.Yellow);
         trigger2.SetXY(1900, 100);
         AddChild(trigger2);
@@ -103,14 +111,14 @@ public class HUD : GameObject
             if (player == 1)
             {
                 AddScoreP1(250);
+                trigger1.ClearTransparent();
                 trigger1.Text("PERFECT!");
-                Task.Delay(200).ContinueWith(t => trigger1.ClearTransparent());
             }
             else if (player == 2)
             {
                 AddScoreP2(250);
+                trigger2.ClearTransparent();
                 trigger2.Text("PERFECT!");
-                Task.Delay(200).ContinueWith(t => trigger2.ClearTransparent());
             }
         }
     }
@@ -125,15 +133,15 @@ public class HUD : GameObject
         {
             if (player == 1)
             {
-                AddScoreP1(150); 
+                AddScoreP1(150);
+                trigger1.ClearTransparent();
                 trigger1.Text("GOOD!");
-                Task.Delay(200).ContinueWith(t => trigger1.ClearTransparent());
             }
             else if (player == 2)
             {
                 AddScoreP2(150);
+                trigger2.ClearTransparent();
                 trigger2.Text("GOOD!");
-                Task.Delay(200).ContinueWith(t => trigger2.ClearTransparent());
             }
         }
     }
@@ -149,14 +157,14 @@ public class HUD : GameObject
             if (player == 1)
             {
                 AddScoreP1(100);
+                trigger1.ClearTransparent();
                 trigger1.Text("OK!");
-                Task.Delay(200).ContinueWith(t => trigger1.ClearTransparent());
             }
             else if (player == 2)
             {
                 AddScoreP2(100);
+                trigger2.ClearTransparent();
                 trigger2.Text("OK!");
-                Task.Delay(200).ContinueWith(t => trigger2.ClearTransparent());
             }
         }
     }
@@ -172,14 +180,14 @@ public class HUD : GameObject
             if (player == 1)
             {
                 if (ScoreP1 > 0) { RemoveScoreP1(50); }
+                trigger1.ClearTransparent();
                 trigger1.Text("Wrong!");
-                Task.Delay(200).ContinueWith(t => trigger1.ClearTransparent());
             }
             else if (player == 2)
             {
                 if (ScoreP2 > 0) { RemoveScoreP2(50); }
+                trigger2.ClearTransparent();
                 trigger2.Text("Wrong!");
-                Task.Delay(200).ContinueWith(t => trigger2.ClearTransparent());
             }
         }
     }
@@ -195,14 +203,14 @@ public class HUD : GameObject
             if (player == 1)
             {
                 if (ScoreP1 > 0) { RemoveScoreP1(50); }
-                trigger1.Text("Missed!");
                 trigger1.ClearTransparent();
+                trigger1.Text("Missed!");
             }
             else if (player == 2)
             {
                 if (ScoreP2 > 0) { RemoveScoreP2(50); }
+                trigger2.ClearTransparent();
                 trigger2.Text("Missed!");
-                trigger2.ClearTransparent() ;
             }
         }
     }
@@ -218,14 +226,14 @@ public class HUD : GameObject
             if (player == 1)
             {
                 if (ScoreP1 > 0) { RemoveScoreP1(50); }
+                trigger1.ClearTransparent();
                 trigger1.Text("Bad Item!");
-                Task.Delay(200).ContinueWith(t => trigger1.ClearTransparent());
             }
             else if (player == 2)
             {
                 if (ScoreP2 > 0) { RemoveScoreP2(50); }
+                trigger2.ClearTransparent();
                 trigger2.Text("Bad Item!");
-                Task.Delay(200).ContinueWith(t => trigger2.ClearTransparent());
             }
         }
     }
@@ -241,14 +249,14 @@ public class HUD : GameObject
             if (player == 1)
             {
                 if (ScoreP1 > 0) { RemoveScoreP1(50); }
+                trigger1.ClearTransparent();
                 trigger1.Text("To Fast!");
-                Task.Delay(200).ContinueWith(t => trigger1.ClearTransparent());
             }
             else if (player == 2)
             {
                 if (ScoreP2 > 0) { RemoveScoreP2(50); }
+                trigger2.ClearTransparent();
                 trigger2.Text("To Fast!");
-                Task.Delay(200).ContinueWith(t => trigger2.ClearTransparent());
             }
         }
     }

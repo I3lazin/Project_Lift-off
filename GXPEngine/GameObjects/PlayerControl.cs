@@ -41,22 +41,18 @@ public class PlayerControl : Sprite
         if (Input.GetKeyDown(Key.Q) && !Row1Disabled)
         {
             CorrectSnackType(0, ClosestSnack1, 1);
-            Console.WriteLine("Pressed: Q");
         }
         if (Input.GetKeyDown(Key.W) && !Row1Disabled)
         {
             CorrectSnackType(1, ClosestSnack1, 1);
-            Console.WriteLine("Pressed: W");
         }
         if (Input.GetKeyDown(Key.E) && !Row2Disabled)
         {
             CorrectSnackType(2, ClosestSnack2, 1);
-            Console.WriteLine("Pressed: E");
         }
         if (Input.GetKeyDown(Key.R) && !Row2Disabled)
         {
             CorrectSnackType(3, ClosestSnack2, 1);
-            Console.WriteLine("Pressed: R");
         }
     }
 
@@ -71,22 +67,18 @@ public class PlayerControl : Sprite
         if (Input.GetKeyDown(Key.O) && !Row3Disabled)
         {
             CorrectSnackType(0,ClosestSnack3,2);
-            Console.WriteLine("Pressed: O");
         }
         if (Input.GetKeyDown(Key.P) && !Row3Disabled)
         {
             CorrectSnackType(1, ClosestSnack3, 2);
-            Console.WriteLine("Pressed: P");
         }
         if (Input.GetKeyDown(Key.SQ_BRACKET_1) && !Row4Disabled)
         {
             CorrectSnackType(2, ClosestSnack4, 2);
-            Console.WriteLine("Pressed: [");
         }
         if (Input.GetKeyDown(Key.SQ_BRACKET_2) && !Row4Disabled)
         {
             CorrectSnackType(3, ClosestSnack4, 2);
-            Console.WriteLine("Pressed: ]");
         } 
     }
     
