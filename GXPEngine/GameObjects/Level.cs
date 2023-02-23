@@ -10,8 +10,9 @@ using TiledMapParser;
 public class Level : Pivot
 {
     TiledLoader loader;
+    PlayerControl controls = null;
     public string currentLevelName;
-
+    string musicname;
 
     public Level(string filename)
     {
@@ -20,14 +21,15 @@ public class Level : Pivot
         CreateLevel();
     }
 
-    public Level(string filename, string musicname)
+    public Level(string filename, string musicfilename)
     {
         currentLevelName = filename;
         loader = new TiledLoader(filename);
+        musicname = musicfilename; 
         CreateLevel();
-        if (musicname != null)
+        if (musicfilename != null)
         {
-            Task.Delay(1000).ContinueWith(t => { new Sound(musicname,false,true).Play(); });
+            Task.Delay(1000).ContinueWith(t => { new Sound(musicfilename,false,true).Play(); });
         }
         HUD hud = new HUD();
     }
@@ -81,6 +83,11 @@ public class Level : Pivot
 
     void Update()
     {
-
+        if (controls == null) controls = game.FindObjectOfType<PlayerControl>();
+        if (musicname != null)
+        {
+            controls.CheckInputPlayer1();
+            controls.CheckInputPlayer2();
+        }
     }
 }

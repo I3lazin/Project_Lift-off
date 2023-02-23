@@ -25,7 +25,7 @@ public class PlayerControl : Sprite
         
     }
 
-    async void CheckInputPlayer1()
+    public async void CheckInputPlayer1()
     {
         //get snack item lists row 1 & 2
         MyGame myGame = (MyGame)game;
@@ -55,7 +55,7 @@ public class PlayerControl : Sprite
         }
     }
 
-    async void CheckInputPlayer2()
+    public async void CheckInputPlayer2()
     {
         //get snack item lists row 3 & 4
         MyGame myGame = (MyGame)game;
@@ -103,7 +103,6 @@ public class PlayerControl : Sprite
             return 0;
         }
     }
-
 
     void CorrectHeight(float y, Snacks snack, int player)
     {
@@ -155,7 +154,5 @@ public class PlayerControl : Sprite
     void Update()
     {
         if (hud == null) hud = game.FindObjectOfType<HUD>();
-        CheckInputPlayer1();
-        CheckInputPlayer2();
     }
 }
