@@ -57,9 +57,9 @@ public class Snacks : Sprite
         }
         if (canmove)
         {
-            y = y + 1 * snackSpeed;
+            y = y + 2 * snackSpeed;
         }
-        if (y >= 929)
+        if (y >= 1180)
         {
             DestoryListSnack(this);
             if (snackRow == 1 && onlyonce == 0 || snackRow == 2 && onlyonce == 0)
@@ -74,7 +74,7 @@ public class Snacks : Sprite
                
             }
         }
-        if (y > 1208)
+        if (y > 1440)
         {
 
             this.Destroy();
@@ -91,19 +91,19 @@ public class Snacks : Sprite
         switch (snackRow - 1)
         {
             case 0:
-                x = 736;
+                x = 970;
                 break;
             case 1:
-                x = 896;
+                x = 1180;
                 break;
             case 2:
-                x = 1056;
+                x = 1395;
                 break;
             case 3:
-                x = 1216;
+                x = 1605;
                 break;
             default:
-                x = 736;
+                x = 970;
                 break;
         }
     }

@@ -25,26 +25,26 @@ public class HUD : GameObject
     public HUD()
     {
         //Font
-        bangerFont = Utils.LoadFont("Font.otf",40);
+        bangerFont = Utils.LoadFont("Font.otf",60);
 
         //Player 1 Score
-        Player1Score = new EasyDraw(500, 60);
+        Player1Score = new EasyDraw(700, 60);
         Player1Score.TextFont(bangerFont);
         Player1Score.TextAlign(CenterMode.Min,CenterMode.Center);
         Player1Score.Fill(Color.Yellow);
         Player1Score.Text("Score: 000000");
-        Player1Score.SetXY(120, 1020);
+        Player1Score.SetXY(120, 1350);
         AddChild(Player1Score);
 
         //Player 1 Hit
 
         //Player 2 Score
-        Player2Score = new EasyDraw(500, 60);
+        Player2Score = new EasyDraw(700, 60);
         Player2Score.TextFont(bangerFont);
         Player2Score.TextAlign(CenterMode.Min, CenterMode.Center);
         Player2Score.Fill(Color.Yellow);
         Player2Score.Text("Score: 000000");
-        Player2Score.SetXY(1450, 1020);
+        Player2Score.SetXY(1930, 1350);
         AddChild(Player2Score);
 
 

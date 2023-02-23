@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ using TiledMapParser;
 public class PlayerControl : Sprite
 {
     HUD hud = null;
+    int barheight = 1050;
     public bool Row1Disabled = false;
     public bool Row2Disabled = false;
     public bool Row3Disabled = false;
@@ -20,7 +22,7 @@ public class PlayerControl : Sprite
     Snacks ClosestSnack4 = new Snacks();
     public Level myLevel;
 
-    public PlayerControl(TiledObject obj = null) : base("circle.png", false, true)
+    public PlayerControl(TiledObject obj = null) : base("Blank.png", false, true)
     {
         
     }
@@ -85,22 +87,16 @@ public class PlayerControl : Sprite
         } 
     }
     
-    int CheckSelectLevelInput()
+    public async void CheckSelectLevelInput()
     {
         // Select level
         if (Input.GetKeyDown(Key.B))
         {
             Console.WriteLine("Pressed: B");
-            return 1;
         }
         if (Input.GetKeyDown(Key.N))
         {
             Console.WriteLine("Pressed: N");
-            return 2;
-        }
-        else
-        {
-            return 0;
         }
     }
 
@@ -113,17 +109,17 @@ public class PlayerControl : Sprite
                 snack.Destroy();
                 hud.TriggerToFast(player);
                 break;
-            case float n when (n > 840 && n < 860):
+            case float n when (n > barheight - 10 && n < barheight + 10):
                 snackLoader.DestoryListSnack(snack);
                 snack.Destroy();
                 hud.TriggerPerfect(player);
                 break;
-            case float n when (n > 810 && n < 840 || n > 860 && n < 890):
+            case float n when (n > barheight - 40 && n < barheight - 10 || n > barheight + 10 && n < barheight + 40):
                 snackLoader.DestoryListSnack(snack);
                 snack.Destroy();
                 hud.TriggerGood(player);
                 break;
-            case float n when (n > 722 && n < 810 || n > 860 && n < 928):
+            case float n when (n > barheight - 128 && n < barheight - 40 || n > barheight + 40 && n < barheight + 128):
                 snackLoader.DestoryListSnack(snack);
                 snack.Destroy();
                 hud.TriggerNormal(player);

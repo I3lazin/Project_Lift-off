@@ -12,7 +12,7 @@ public class Level : Pivot
     TiledLoader loader;
     PlayerControl controls = null;
     public string currentLevelName;
-    string musicname;
+    string musicname = null;
 
     public Level(string filename)
     {
@@ -88,6 +88,10 @@ public class Level : Pivot
         {
             controls.CheckInputPlayer1();
             controls.CheckInputPlayer2();
+        }
+        else if (musicname == null)
+        {
+            controls.CheckSelectLevelInput();
         }
     }
 }
