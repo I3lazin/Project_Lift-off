@@ -189,12 +189,12 @@ public class HUD : GameObject
             triggerWrong.Text("WRONG!");
             if (player == 1)
             {
-                RemoveScoreP1(50);
+                if (ScoreP1 > 0) { RemoveScoreP1(50); }
                 triggerWrong.SetXY(120, 100);
             }
             else if (player == 2)
             {
-                RemoveScoreP2(50);
+                if (ScoreP2 > 0) { RemoveScoreP2(50); }
                 triggerWrong.SetXY(1100, 100);
             }
             AddChild(triggerWrong);
@@ -218,12 +218,12 @@ public class HUD : GameObject
             triggerMissed.Text("MISSED!");
             if (player == 1)
             {
-                RemoveScoreP1(50);
+                if (ScoreP1 > 0) { RemoveScoreP1(50); }
                 triggerMissed.SetXY(120, 100);
             }
             else if (player == 2)
             {
-                RemoveScoreP2(50);
+                if (ScoreP2 > 0) { RemoveScoreP2(50); }
                 triggerMissed.SetXY(1100, 100);
             }
             AddChild(triggerMissed);
@@ -247,12 +247,12 @@ public class HUD : GameObject
             triggerBad.Text("BAD ITEM!");
             if (player == 1)
             {
-                RemoveScoreP1(50);
+                if (ScoreP1 > 0) { RemoveScoreP1(50); }
                 triggerBad.SetXY(120, 100);
             }
             else if (player == 2)
             {
-                RemoveScoreP2(50);
+                if (ScoreP2 > 0) { RemoveScoreP2(50); }
                 triggerBad.SetXY(1100, 100);
             }
             AddChild(triggerBad);
@@ -276,12 +276,12 @@ public class HUD : GameObject
             triggerToFast.Text("TO FAST!");
             if (player == 1)
             {
-                RemoveScoreP1(50);
+                if (ScoreP1 > 0) { RemoveScoreP1(50); }
                 triggerToFast.SetXY(120, 100);
             }
             else if (player == 2)
             {
-                RemoveScoreP2(50);
+                if (ScoreP2 > 0) { RemoveScoreP2(50); }
                 triggerToFast.SetXY(1100, 100);
             }
             AddChild(triggerToFast);

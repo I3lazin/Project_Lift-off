@@ -12,12 +12,13 @@ public class Snacks : Sprite
     HUD hud = null;
     int initializationvalue = 0;
     int currentLifeTimeMs = 0;
+    int onlyonce = 0;
     public bool canmove = false;
     public int delayInMs;
     public float snackSpeed;
     public int snackRow;
     public int snackType;
-    string[] snack = {"circle.png","checkers.png","colors.png","square.png","triangle.png"};
+    string[] snack = {"Snack0.png","Snack1.png","Snack2.png","Snack3.png","triangle.png"};
 
     public Snacks(TiledObject obj=null) : base("circle.png", false, true)
     {
@@ -58,17 +59,20 @@ public class Snacks : Sprite
         {
             y = y + 1 * snackSpeed;
         }
-        if (y == 929)
+        if (y >= 929)
         {
-            if (snackRow == 1 || snackRow == 2)
+            DestoryListSnack(this);
+            if (snackRow == 1 && onlyonce == 0 || snackRow == 2 && onlyonce == 0)
             {
+                onlyonce++;
                 hud.TriggerMissed(1);
             }
-            else if (snackRow == 3 || snackRow == 4)
+            else if (snackRow == 3 && onlyonce == 0 || snackRow == 4 && onlyonce == 0)
             {
+                onlyonce++;
                 hud.TriggerMissed(2);
+               
             }
-            DestoryListSnack(this);
         }
         if (y > 1208)
         {

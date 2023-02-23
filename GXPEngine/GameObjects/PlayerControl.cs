@@ -25,70 +25,64 @@ public class PlayerControl : Sprite
         
     }
 
-    int CheckInputPlayer1()
+    async void CheckInputPlayer1()
     {
         //get snack item lists row 1 & 2
         MyGame myGame = (MyGame)game;
         if (myGame.snacks1.Count != 0) { ClosestSnack1 = myGame.snacks1[0]; }
         if (myGame.snacks2.Count != 0) { ClosestSnack2 = myGame.snacks2[0]; }
+
         // Player 1
         if (Input.GetKeyDown(Key.Q) && !Row1Disabled)
         {
+            CorrectSnackType(0, ClosestSnack1, 1);
             Console.WriteLine("Pressed: Q");
-            return 1;
         }
         if (Input.GetKeyDown(Key.W) && !Row1Disabled)
         {
+            CorrectSnackType(1, ClosestSnack1, 1);
             Console.WriteLine("Pressed: W");
-            return 2;
         }
         if (Input.GetKeyDown(Key.E) && !Row2Disabled)
         {
+            CorrectSnackType(2, ClosestSnack2, 1);
             Console.WriteLine("Pressed: E");
-            return 3;
         }
         if (Input.GetKeyDown(Key.R) && !Row2Disabled)
         {
+            CorrectSnackType(3, ClosestSnack2, 1);
             Console.WriteLine("Pressed: R");
-            return 4;
-        }
-        else
-        {
-            return 0;
         }
     }
 
-    int CheckInputPlayer2()
+    async void CheckInputPlayer2()
     {
         //get snack item lists row 3 & 4
         MyGame myGame = (MyGame)game;
         if (myGame.snacks3.Count != 0) { ClosestSnack3 = myGame.snacks3[0]; }
         if (myGame.snacks4.Count != 0) { ClosestSnack4 = myGame.snacks4[0]; }
+
         // Player 2
         if (Input.GetKeyDown(Key.O) && !Row3Disabled)
         {
+            CorrectSnackType(0,ClosestSnack3,2);
             Console.WriteLine("Pressed: O");
-            return 1;
         }
         if (Input.GetKeyDown(Key.P) && !Row3Disabled)
         {
+            CorrectSnackType(1, ClosestSnack3, 2);
             Console.WriteLine("Pressed: P");
-            return 2;
         }
         if (Input.GetKeyDown(Key.SQ_BRACKET_1) && !Row4Disabled)
         {
+            CorrectSnackType(2, ClosestSnack4, 2);
             Console.WriteLine("Pressed: [");
-            return 3;
         }
         if (Input.GetKeyDown(Key.SQ_BRACKET_2) && !Row4Disabled)
         {
+            CorrectSnackType(3, ClosestSnack4, 2);
             Console.WriteLine("Pressed: ]");
-            return 4;
         } 
-        else
-        {
-            return 0;
-        }
     }
     
     int CheckSelectLevelInput()
@@ -111,7 +105,7 @@ public class PlayerControl : Sprite
     }
 
 
-    void CorrectButton(float y, Snacks snack, int player)
+    void CorrectHeight(float y, Snacks snack, int player)
     {
         switch (y)
         {
@@ -138,210 +132,30 @@ public class PlayerControl : Sprite
         }
     }
 
+    void CorrectSnackType(int input,Snacks snack, int player)
+    {
+        if (snack.snackType == input)
+        {
+            CorrectHeight(snack.y, snack, player);
+        }
+        else if (snack.snackType == 4)
+        {
+            snackLoader.DestoryListSnack(snack);
+            snack.Destroy();
+            hud.TriggerBad(player);
+        }
+        else
+        {
+            snackLoader.DestoryListSnack(snack);
+            snack.Destroy();
+            hud.TriggerWrong(player);
+        }
+    }
+
     void Update()
     {
         if (hud == null) hud = game.FindObjectOfType<HUD>();
-        switch (CheckInputPlayer1())
-        {
-            case 1:
-                switch (ClosestSnack1.snackType)
-                {
-                    case 0:
-                        {
-                            CorrectButton(ClosestSnack1.y, ClosestSnack1,1);
-                            break;
-                        }
-                    case int n when (n > 0 && n < 4):
-                        {
-                            snackLoader.DestoryListSnack(ClosestSnack1);
-                            ClosestSnack1.Destroy();
-                            hud.TriggerWrong(1);
-                            break;
-                        }
-                    case 4:
-                        {
-                            snackLoader.DestoryListSnack(ClosestSnack1);
-                            ClosestSnack1.Destroy();
-                            hud.TriggerBad(1);
-                            break;
-                        }
-                }
-                break;
-            case 2:
-                switch (ClosestSnack1.snackType)
-                {
-                    case 1:
-                        {
-                            CorrectButton(ClosestSnack1.y, ClosestSnack1,1);
-                            break;
-                        }
-                    case int n when (n > 1 && n < 4 && n == 0):
-                        {
-                            snackLoader.DestoryListSnack(ClosestSnack1);
-                            ClosestSnack1.Destroy();
-                            hud.TriggerWrong(1);
-                            break;
-                        }
-                    case 4:
-                        {
-                            snackLoader.DestoryListSnack(ClosestSnack1);
-                            ClosestSnack1.Destroy();
-                            hud.TriggerBad(1);
-                            break;
-                        }
-                }
-                break;
-            case 3:
-                switch (ClosestSnack2.snackType)
-                {
-                    case 2:
-                        {
-                            CorrectButton(ClosestSnack2.y, ClosestSnack2,1);
-                            break;
-                        }
-                    case int n when (n >= 0 && n < 2 && n == 3):
-                        {
-                            snackLoader.DestoryListSnack(ClosestSnack2);
-                            ClosestSnack2.Destroy();
-                            hud.TriggerWrong(1);
-                            break;
-                        }
-                    case 4:
-                        {
-                            snackLoader.DestoryListSnack(ClosestSnack2);
-                            ClosestSnack2.Destroy();
-                            hud.TriggerBad(1);
-                            break;
-                        }
-                }
-                break;
-            case 4:
-                switch (ClosestSnack2.snackType)
-                {
-                    case 3:
-                        {
-                            CorrectButton(ClosestSnack2.y, ClosestSnack2,1);
-                            break;
-                        }
-                    case int n when (n >= 0 && n < 3):
-                        {
-                            snackLoader.DestoryListSnack(ClosestSnack2);
-                            ClosestSnack2.Destroy();
-                            hud.TriggerWrong(1);
-                            break;
-                        }
-                    case 4:
-                        {
-                            snackLoader.DestoryListSnack(ClosestSnack2);
-                            ClosestSnack2.Destroy();
-                            hud.TriggerBad(1);
-                            break;
-                        }
-                }
-                break;
-            case 0:
-                break;
-        }
-        switch (CheckInputPlayer2())
-        {
-            case 1:
-                switch (ClosestSnack3.snackType)
-                {
-                    case 0:
-                        {
-                            CorrectButton(ClosestSnack3.y, ClosestSnack3, 2);
-                            break;
-                        }
-                    case int n when (n > 0 && n < 4):
-                        {
-                            snackLoader.DestoryListSnack(ClosestSnack3);
-                            ClosestSnack3.Destroy();
-                            hud.TriggerWrong(2);
-                            break;
-                        }
-                    case 4:
-                        {
-                            snackLoader.DestoryListSnack(ClosestSnack3);
-                            ClosestSnack3.Destroy();
-                            hud.TriggerBad(2);
-                            break;
-                        }
-                }
-                break;
-            case 2:
-                switch (ClosestSnack3.snackType)
-                {
-                    case 1:
-                        {
-                            CorrectButton(ClosestSnack3.y, ClosestSnack3, 2);
-                            break;
-                        }
-                    case int n when (n > 1 && n < 4 && n == 0):
-                        {
-                            snackLoader.DestoryListSnack(ClosestSnack3);
-                            ClosestSnack3.Destroy();
-                            hud.TriggerWrong(2);
-                            break;
-                        }
-                    case 4:
-                        {
-                            snackLoader.DestoryListSnack(ClosestSnack3);
-                            ClosestSnack3.Destroy();
-                            hud.TriggerBad(2);
-                            break;
-                        }
-                }
-                break;
-            case 3:
-                switch (ClosestSnack4.snackType)
-                {
-                    case 2:
-                        {
-                            CorrectButton(ClosestSnack4.y, ClosestSnack4, 2);
-                            break;
-                        }
-                    case int n when (n >= 0 && n < 2 && n == 3):
-                        {
-                            snackLoader.DestoryListSnack(ClosestSnack4);
-                            ClosestSnack4.Destroy();
-                            hud.TriggerWrong(2);
-                            break;
-                        }
-                    case 4:
-                        {
-                            snackLoader.DestoryListSnack(ClosestSnack4);
-                            ClosestSnack4.Destroy();
-                            hud.TriggerBad(2);
-                            break;
-                        }
-                }
-                break;
-            case 4:
-                switch (ClosestSnack2.snackType)
-                {
-                    case 3:
-                        {
-                            CorrectButton(ClosestSnack4.y, ClosestSnack4, 2);
-                            break;
-                        }
-                    case int n when (n >= 0 && n < 3):
-                        {
-                            snackLoader.DestoryListSnack(ClosestSnack4);
-                            ClosestSnack4.Destroy();
-                            hud.TriggerWrong(2);
-                            break;
-                        }
-                    case 4:
-                        {
-                            snackLoader.DestoryListSnack(ClosestSnack4);
-                            ClosestSnack4.Destroy();
-                            hud.TriggerBad(2);
-                            break;
-                        }
-                }
-                break;
-            case 0:
-                break;
-        }
+        CheckInputPlayer1();
+        CheckInputPlayer2();
     }
 }
