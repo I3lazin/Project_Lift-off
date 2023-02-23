@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="1002">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="30" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="1002">
  <imagelayer id="2" name="Image Layer 1">
   <image source="final background.jpg" width="2560" height="1440"/>
  </imagelayer>
@@ -8018,4 +8018,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <imagelayer id="6" name="Image Layer 2">
+  <image source="vendingoverlay.png" width="2560" height="1440"/>
+ </imagelayer>
 </map>

@@ -29,7 +29,7 @@ public class Level : Pivot
         CreateLevel();
         if (musicfilename != null)
         {
-            Task.Delay(1000).ContinueWith(t => { new Sound(musicfilename,false,true).Play(); });
+            Task.Delay(1200).ContinueWith(t => { new Sound(musicfilename,false,true).Play(); });
         }
         HUD hud = new HUD();
     }
@@ -57,6 +57,12 @@ public class Level : Pivot
         AddChild(mainlayer2);
         loader.rootObject = mainlayer2;
         loader.LoadObjectGroups(1);
+
+        // Background layer
+        Pivot foreground = new Pivot();
+        AddChild(foreground);
+        loader.rootObject = foreground;
+        loader.LoadImageLayers(1);
 
         // Seperate snacks into different Lists based off the row
         Snacks[] snacks = mainlayer1.FindObjectsOfType<Snacks>();

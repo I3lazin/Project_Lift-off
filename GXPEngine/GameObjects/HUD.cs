@@ -108,11 +108,11 @@ public class HUD : GameObject
             else if (player == 2)
             {
                 AddScoreP2(200);
-                triggerPerfect.SetXY(1100, 100);
+                triggerPerfect.SetXY(1900, 100);
             }
             AddChild(triggerPerfect);
-
-            RemoveChild(triggerPerfect);
+            //Task.Delay(100).ContinueWith(t => { RemoveChild(triggerPerfect); });
+            
         }
     }
 
@@ -137,11 +137,10 @@ public class HUD : GameObject
             else if (player == 2)
             {
                 AddScoreP2(150);
-                triggerGood.SetXY(1100, 100);
+                triggerGood.SetXY(1900, 100);
             }
             AddChild(triggerGood);
-
-            RemoveChild(triggerGood);
+            //Task.Delay(100).ContinueWith(t => { RemoveChild(triggerGood); });
         }
     }
 
@@ -166,11 +165,10 @@ public class HUD : GameObject
             else if (player == 2)
             {
                 AddScoreP2(100);
-                triggerNormal.SetXY(1100, 100);
+                triggerNormal.SetXY(1900, 100);
             }
             AddChild(triggerNormal);
-
-            RemoveChild(triggerNormal);
+            //Task.Delay(100).ContinueWith(t => { RemoveChild(triggerNormal); });
         }
     }
 
@@ -195,11 +193,10 @@ public class HUD : GameObject
             else if (player == 2)
             {
                 if (ScoreP2 > 0) { RemoveScoreP2(50); }
-                triggerWrong.SetXY(1100, 100);
+                triggerWrong.SetXY(1900, 100);
             }
             AddChild(triggerWrong);
-
-            RemoveChild(triggerWrong);
+            //Task.Delay(100).ContinueWith(t => { RemoveChild(triggerWrong); });
         }
     }
 
@@ -224,11 +221,10 @@ public class HUD : GameObject
             else if (player == 2)
             {
                 if (ScoreP2 > 0) { RemoveScoreP2(50); }
-                triggerMissed.SetXY(1100, 100);
+                triggerMissed.SetXY(1900, 100);
             }
             AddChild(triggerMissed);
-
-            RemoveChild(triggerMissed);
+            //Task.Delay(100).ContinueWith(t => { RemoveChild(triggerMissed); });
         }
     }
 
@@ -253,11 +249,10 @@ public class HUD : GameObject
             else if (player == 2)
             {
                 if (ScoreP2 > 0) { RemoveScoreP2(50); }
-                triggerBad.SetXY(1100, 100);
+                triggerBad.SetXY(1900, 100);
             }
             AddChild(triggerBad);
-
-            RemoveChild(triggerBad);
+            //Task.Delay(100).ContinueWith(t => { RemoveChild(triggerBad); });
         }
     }
 
@@ -282,11 +277,10 @@ public class HUD : GameObject
             else if (player == 2)
             {
                 if (ScoreP2 > 0) { RemoveScoreP2(50); }
-                triggerToFast.SetXY(1100, 100);
+                triggerToFast.SetXY(1900, 100);
             }
             AddChild(triggerToFast);
-
-            RemoveChild(triggerToFast);   
+            //Task.Delay(100).ContinueWith(t => { RemoveChild(triggerToFast); });   
         }
     }
     void Update()

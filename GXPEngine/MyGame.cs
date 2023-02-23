@@ -18,7 +18,7 @@ public class MyGame : Game {
     public List<Snacks> snacks4 = new List<Snacks>();
     public PlayerControl controls = null;
     
-    public MyGame() : base(2560, 1440, true, false, 1920, 1080)
+    public MyGame() : base(2560, 1440, false, false, 1920, 1080)
 	{
         LoadLevel("Level1.tmx", "Song1.mp3");
         OnAfterStep += CheckLoadLevel;

@@ -141,8 +141,6 @@ public class PlayerControl : Sprite
         }
         else
         {
-            snackLoader.DestoryListSnack(snack);
-            snack.Destroy();
             hud.TriggerWrong(player);
         }
     }

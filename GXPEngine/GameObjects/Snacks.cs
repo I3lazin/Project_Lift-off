@@ -20,7 +20,7 @@ public class Snacks : Sprite
     public int snackType;
     string[] snack = {"Snack0.png","Snack1.png","Snack2.png","Snack3.png","triangle.png"};
 
-    public Snacks(TiledObject obj=null) : base("circle.png", false, true)
+    public Snacks(TiledObject obj=null) : base("triangle.png", false, true)
     {
         Initialize(obj);
     }
@@ -57,7 +57,7 @@ public class Snacks : Sprite
         }
         if (canmove)
         {
-            y = y + 2 * snackSpeed;
+            y = y + (1.5f * snackSpeed);
         }
         if (y >= 1180)
         {
@@ -71,12 +71,10 @@ public class Snacks : Sprite
             {
                 onlyonce++;
                 hud.TriggerMissed(2);
-               
             }
         }
         if (y > 1440)
         {
-
             this.Destroy();
         }
         if (myGame.snacks1.Count == 0 && myGame.snacks2.Count == 0 && myGame.snacks3.Count == 0 && myGame.snacks4.Count == 0)
