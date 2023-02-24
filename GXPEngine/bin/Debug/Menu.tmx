@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="1" height="1" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="7">
+ <imagelayer id="5" name="Image Layer 1">
+  <image source="final background.png" width="2560" height="1440"/>
+ </imagelayer>
+ <objectgroup id="2" name="Object Layer 1">
+  <object id="1" name="PlayerControl" class="PlayerControl" x="0" y="0" width="32" height="32"/>
+  <object id="3" name="Poster" class="Poster" x="768" y="0" width="1034" height="1440.06"/>
+  <object id="4" name="PlayerAnimation" class="PlayerAnimation" x="-160" y="422" width="200" height="400">
+   <properties>
+    <property name="CharacterType" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="5" name="PlayerAnimation" class="PlayerAnimation" x="1792" y="422" width="200" height="400">
+   <properties>
+    <property name="CharacterType" type="int" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>

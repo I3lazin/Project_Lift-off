@@ -23,7 +23,7 @@ public class PlayerControl : Sprite
     Snacks ClosestSnack2 = new Snacks();
     Snacks ClosestSnack3 = new Snacks();
     Snacks ClosestSnack4 = new Snacks();
-    public Level myLevel;
+    public Level myLevel = null;
 
     public PlayerControl(TiledObject obj = null) : base("Blank.png", false, true)
     {
@@ -84,14 +84,15 @@ public class PlayerControl : Sprite
     
     public void CheckSelectLevelInput()
     {
+        MyGame myGame = (MyGame)game;
         // Select level
         if (Input.GetKeyDown(Key.B))
         {
-            Console.WriteLine("Pressed: B");
+
         }
         if (Input.GetKeyDown(Key.N))
         {
-            Console.WriteLine("Pressed: N");
+
         }
     }
 
@@ -145,8 +146,9 @@ public class PlayerControl : Sprite
     void Update()
     {
         if (hud == null) hud = game.FindObjectOfType<HUD>();
-        if (anim1 == null || anim2 == null) 
-        { 
+        if (myLevel == null) myLevel = game.FindObjectOfType<Level>();
+        if (anim1 == null || anim2 == null)
+        {
             animList = game.FindObjectsOfType<PlayerAnimation>();
             anim1 = animList[0];
             anim2 = animList[1];

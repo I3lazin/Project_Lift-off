@@ -30,7 +30,7 @@ public class Level : Pivot
         if (musicfilename != null)
         {
             Task.Delay(200).ContinueWith(t => { new Sound(musicfilename,false,true).Play(); });
-            Task.Delay(1200).ContinueWith(t => { new Sound("Start.mp3", false, false).Play(); });
+            if (filename != "Menu.tmx") { Task.Delay(1200).ContinueWith(t => { new Sound("Start.mp3", false, false).Play(); }); }
         }
         HUD hud = new HUD();
     }
@@ -91,12 +91,12 @@ public class Level : Pivot
     void Update()
     {
         if (controls == null) controls = game.FindObjectOfType<PlayerControl>();
-        if (musicname != null)
+        if (currentLevelName != "Menu.tmx")
         {
             controls.CheckInputPlayer1();
             controls.CheckInputPlayer2();
         }
-        else if (musicname == null)
+        else if (currentLevelName == "Menu.tmx")
         {
             controls.CheckSelectLevelInput();
         }
