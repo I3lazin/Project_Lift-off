@@ -30,6 +30,7 @@ public class Level : Pivot
         if (musicfilename != null)
         {
             Task.Delay(200).ContinueWith(t => { new Sound(musicfilename,false,true).Play(); });
+            Task.Delay(1200).ContinueWith(t => { new Sound("Start.mp3", false, false).Play(); });
         }
         HUD hud = new HUD();
     }

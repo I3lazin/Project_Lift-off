@@ -18,9 +18,9 @@ public class Snacks : Sprite
     public float snackSpeed;
     public int snackRow;
     public int snackType;
-    string[] snack = {"Snack0.png","Snack1.png","Snack2.png","Snack3.png","triangle.png"};
+    string[] snack = {"Snack0.png","Snack1.png","Snack2.png","Snack3.png","Pickle.png"};
 
-    public Snacks(TiledObject obj = null) : base("triangle.png", false, false)
+    public Snacks(TiledObject obj = null) : base("Snack0.png", false, false)
     {
         Initialize(obj);
     }
@@ -50,7 +50,7 @@ public class Snacks : Sprite
 
         if (hud == null) hud = game.FindObjectOfType<HUD>();
         MyGame myGame = (MyGame)game;
-        if (Time.time - currentLifeTimeMs >= delayInMs + 500)
+        if (Time.time - currentLifeTimeMs >= delayInMs)
         {
             canmove = true;
         }

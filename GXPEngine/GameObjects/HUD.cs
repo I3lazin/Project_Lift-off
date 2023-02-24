@@ -70,34 +70,75 @@ public class HUD : GameObject
 
     public void SetScoreP1() 
     {
-        Player1Score.Text(String.Format("Score: {0:0000000}",ScoreP1), true);
+        Player1Score.ClearTransparent();
+        Player1Score.Fill(Color.Black, 192);
+        Player1Score.Rect(0, 0, 1180, 130);
+        Player1Score.Fill(Color.FromArgb(255, 230, 230, 0));
+        Player1Score.Text(String.Format("Score: {0:0000000}",ScoreP1));
     }
 
     public void SetScoreP2()
     {
-        Player2Score.Text(String.Format("Score: {0:0000000}",ScoreP2), true);
+        Player2Score.Fill(Color.Black, 192);
+        Player2Score.Rect(0, 0, 1180, 130);
+        Player2Score.Fill(Color.FromArgb(255, 230, 230, 0));
+        Player2Score.Text(String.Format("Score: {0:0000000}",ScoreP2));
+
     }
 
     public void AddScoreP1(int addedpoints)
     {
-        ScoreP1 += addedpoints;
+        consecutiveHitsP1++;
+        if (consecutiveHitsP1 >= 5)
+        {
+            ScoreP1 += (int)(addedpoints * (1.005f * consecutiveHitsP1));
+        } 
+        else
+        {
+            ScoreP1 += addedpoints;
+        }
+
         SetScoreP1();
     }
 
     public void AddScoreP2(int addedpoints)
     {
-        ScoreP2 += addedpoints;
+        consecutiveHitsP2++;
+        if (consecutiveHitsP2 >= 5)
+        {
+            ScoreP2+= (int)(addedpoints * (1.005f * consecutiveHitsP2));
+        }
+        else
+        {
+            ScoreP2 += addedpoints;
+        }
+        if (!(consecutiveHitsP2 % 5 == 0 && consecutiveHitsP2 % 25 == 0 ))
+        {
+            new Sound("NiceStreak.mp3", false, false).Play();
+        }
         SetScoreP2();
     }
 
     public void RemoveScoreP1(int removedpoints)
     {
+        if (consecutiveHitsP1 >= 5)
+        {
+            new Sound("StreakLost.mp3", false,false).Play();
+            Console.WriteLine("SoundEffect");
+        }
+        consecutiveHitsP1 = 0;
         ScoreP1 -= removedpoints;
         SetScoreP1();
     }
 
     public void RemoveScoreP2(int removedpoints)
     {
+        if (consecutiveHitsP2 >= 5)
+        {
+            new Sound("StreakLost.mp3",false,false).Play();
+            Console.WriteLine("SoundEffect");
+        }
+        consecutiveHitsP2 = 0;
         ScoreP2 -= removedpoints;
         SetScoreP2();
     }
