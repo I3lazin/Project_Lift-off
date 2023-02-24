@@ -50,7 +50,7 @@ public class Snacks : Sprite
 
         if (hud == null) hud = game.FindObjectOfType<HUD>();
         MyGame myGame = (MyGame)game;
-        if (Time.time - currentLifeTimeMs >= delayInMs + 12700)
+        if (Time.time - currentLifeTimeMs >= delayInMs + 500)
         {
             canmove = true;
         }
@@ -117,25 +117,21 @@ public class Snacks : Sprite
         switch (obj.snackRow)
         {
             case 1:
-                var numberOfSnacks1 = myGame.snacks1.Count();
                 if (myGame.snacks1.Count == 0) { myGame.controls.Row1Disabled = true;}
                 myGame.snacks1.Remove(obj);
                 break;
 
             case 2:
-                var numberOfSnacks2 = myGame.snacks2.Count();
                 if (myGame.snacks2.Count == 0) { myGame.controls.Row2Disabled = true;}
                 myGame.snacks2.Remove(obj);
                 break;
 
             case 3:
-                var numberOfSnacks3 = myGame.snacks3.Count();
                 if (myGame.snacks3.Count == 0) { myGame.controls.Row3Disabled = true;}
                 myGame.snacks3.Remove(obj);
                 break;
 
             case 4:
-                var numberOfSnacks4 = myGame.snacks4.Count();
                 if (myGame.snacks4.Count == 0) { myGame.controls.Row4Disabled = true;}
                 myGame.snacks4.Remove(obj);
                 break;

@@ -16,6 +16,8 @@ public class HUD : GameObject
     EasyDraw Player2Score;
     EasyDraw trigger1, trigger2;
     Font bangerFont;
+    int consecutiveHitsP1 = 0;
+    int consecutiveHitsP2 = 0;
     public HUD()
     {
         //Font

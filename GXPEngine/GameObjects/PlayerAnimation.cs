@@ -18,7 +18,6 @@ public class PlayerAnimation : AnimationSprite
         Initialize(obj);
     }
 
-
     void Initialize(TiledObject obj = null)
     {
         if (obj != null)
@@ -26,21 +25,21 @@ public class PlayerAnimation : AnimationSprite
             characterType = obj.GetIntProperty("CharacterType", 0);
         }
         ChangeSprite();
-        SetCycle(0, 1, 1);
+        SetCycle(0, 1, 1, false);
     }
 
     public void Hit(int player)
     {
         if (player == 1)
         {
-            SetCycle(hitType * 5, 5, 4);
-            Task.Delay(350).ContinueWith(t => SetCycle(0, 1, 1));
+            SetCycle(hitType * 5, 5, 5);
+            Task.Delay(400).ContinueWith(t => SetCycle(0, 1, 1, false));
             hitType++;
         }
         else if (player == 2)
         {
-            SetCycle(hitType * 5, 5, 4);
-            Task.Delay(350).ContinueWith(t => SetCycle(0, 1, 1));
+            SetCycle(hitType * 5, 5, 5);
+            Task.Delay(400).ContinueWith(t => SetCycle(0, 1, 1, false));
             hitType++;
         }
     }
